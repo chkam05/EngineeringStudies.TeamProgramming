@@ -1,0 +1,128 @@
+Initialize engine version: 5.5.2f1 (3829d7f588f3)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 4000 (ID=0x166)
+    Vendor:   Intel
+    VRAM:     912 MB
+    Driver:   10.18.10.4276
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.163 seconds
+Platform assembly: C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\user\Desktop\CAT_1\Builds\Machines_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 40Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found. Trying XInput9_1_0.dll instead...
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 4.573419 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 19.992245 ms
+
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 295.
+Total: 0.646584 ms (FindLiveObjects: 0.070132 ms CreateObjectMapping: 0.062149 ms MarkObjects: 0.501759 ms  DeleteObjects: 0.011403 ms)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.421460 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 277.
+Total: 1.513259 ms (FindLiveObjects: 0.176756 ms CreateObjectMapping: 0.098641 ms MarkObjects: 1.203081 ms  DeleteObjects: 0.029649 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.193958 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 295.
+Total: 0.678515 ms (FindLiveObjects: 0.067281 ms CreateObjectMapping: 0.063860 ms MarkObjects: 0.533689 ms  DeleteObjects: 0.011973 ms)
+
+Scene with build index: 8 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.706550 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 277.
+Total: 1.456811 ms (FindLiveObjects: 0.108904 ms CreateObjectMapping: 0.108904 ms MarkObjects: 1.203651 ms  DeleteObjects: 0.031930 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.955052 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 295.
+Total: 1.712252 ms (FindLiveObjects: 0.177326 ms CreateObjectMapping: 0.093509 ms MarkObjects: 1.407205 ms  DeleteObjects: 0.029649 ms)
+
+Scene with build index: 3 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Scene with build index: 4 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Scene with build index: 5 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Scene with build index: 6 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.571417 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 277.
+Total: 1.573698 ms (FindLiveObjects: 0.172764 ms CreateObjectMapping: 0.110044 ms MarkObjects: 1.253827 ms  DeleteObjects: 0.033640 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.157466 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 295.
+Total: 1.684313 ms (FindLiveObjects: 0.233774 ms CreateObjectMapping: 0.118597 ms MarkObjects: 1.290889 ms  DeleteObjects: 0.035921 ms)
+
+Scene with build index: 8 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Scene with build index: 7 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Scene with build index: 8 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Scene with build index: 9 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Scene with build index: 10 couldn't be loaded because it has not been added to the build settings.
+To add a scene to the build settings use the menu File->Build Settings...
+ 
+(Filename:  Line: 122)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 1.055404 ms
+
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 277.
+Total: 1.709401 ms (FindLiveObjects: 0.209826 ms CreateObjectMapping: 0.118027 ms MarkObjects: 1.346196 ms  DeleteObjects: 0.029649 ms)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: ea8 -> priority: 1 
