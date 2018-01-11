@@ -47,6 +47,22 @@ public static class Tools {
 	};
 
 	// ######################################################################
+	//	X   X    XXX    XXXXX   X   X
+	//	XX XX   X   X     X     X   X
+	//	X X X   XXXXX     X     XXXXX
+	//	X   X   X   X     X     X   X
+	//	X   X   X   X     x     X   X 
+	// ######################################################################
+
+	public static float radianToDegree( float radian ) {
+		return ( radian * ( 180.0f / Mathf.PI ) );
+	}
+
+	public static float degreeToRadian( float degree ) {
+		return ( Mathf.PI * degree / 180.0f );
+	}
+
+	// ######################################################################
 	//	 XXX     XXX    X        XXX    XXXX     XXXX
 	//	X   X   X   X   X       X   X   X   X   X    
 	//	X       X   X   X       X   X   XXXX     XXX 

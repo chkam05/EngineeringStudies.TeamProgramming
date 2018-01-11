@@ -46,7 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Nauka\RowniaPochyla.cs" />
+     <Compile Include="Assets\Scripts\Nauka\RowniaPochylaGame.cs" />
+     <Compile Include="Assets\Scripts\Nauka\RowniaPochylaUI.cs" />
      <Compile Include="Assets\Scripts\Tools.cs" />
      <Compile Include="Assets\Scripts\UI\DedicatedTestScene.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu.cs" />

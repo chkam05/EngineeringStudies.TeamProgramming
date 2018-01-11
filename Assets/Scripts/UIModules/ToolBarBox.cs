@@ -28,7 +28,8 @@ public class ToolBarBox : MonoBehaviour {
 	private	bool			show_status				=	true;
 	private	float			show_height				=	384.0f;
 	private	float			hide_height				=	128.0f;
-	private	float			speed_animation			=	240.0f;
+	private	float			show_controls			=	160.0f;
+	private	float			speed_animation			=	3.3f;
 
 	private	string			info_title				=	"Informacje";
 	private string			info_about				=	"Opis akcji do wykonania.";
@@ -86,7 +87,6 @@ public class ToolBarBox : MonoBehaviour {
 			hide_animation=true;
 		} else {
 			show_animation=true;
-			container_tools.SetActive( true );
 		}
 	}
 
@@ -96,7 +96,10 @@ public class ToolBarBox : MonoBehaviour {
 		float	height	=	GetComponent<RectTransform>().sizeDelta.y;
 
 		if ( height < show_height ) {
-			float	new_height							=	height + ( speed_animation * Time.deltaTime );
+			float	new_height							=	height + speed_animation;
+			if ( height > show_controls ) {
+				container_tools.SetActive( true );
+			}
 			GetComponent<RectTransform>().sizeDelta		=	new Vector2( width, new_height );
 		} else {
 			show_animation	=	false;
@@ -111,10 +114,12 @@ public class ToolBarBox : MonoBehaviour {
 		float	height	=	GetComponent<RectTransform>().sizeDelta.y;
 
 		if ( height > hide_height ) {
-			float	new_height							=	height - ( speed_animation * Time.deltaTime );
+			float	new_height							=	height - speed_animation;
 			GetComponent<RectTransform>().sizeDelta		=	new Vector2( width, new_height );
+			if ( height < show_controls ) {
+				container_tools.SetActive( false );
+			}
 		} else {
-			container_tools.SetActive( false );
 			hide_animation	=	false;
 			show_status		=	false;
 			GetComponent<RectTransform>().sizeDelta		=	new Vector2( width, hide_height );
@@ -140,6 +145,11 @@ public class ToolBarBox : MonoBehaviour {
 		this.functionStop		=	functionStop;
 		this.objectsStart		=	argsStart;
 		this.objectsStop		=	argsStop;
+	}
+
+	public void setStartStopHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
+		if ( enterButton != null ) { button_startstop.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
+		if ( exitButton != null ) { button_startstop.GetComponent<ButtonBehaviour>().setOnMouseExit( exitButton ); }
 	}
 
 	// ----------------------------------------------------------------------
@@ -185,6 +195,11 @@ public class ToolBarBox : MonoBehaviour {
 		component_achivments.GetComponent<AchivmentBox>().Init();
 	}
 
+	public void setAchivmnetsHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
+		if ( enterButton != null ) { button_achivments.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
+		if ( exitButton != null ) { button_achivments.GetComponent<ButtonBehaviour>().setOnMouseExit( exitButton ); }
+	}
+
 	// ######################################################################
 	//	XXXXX   X   X   XXXXX    XXX    XXXX    X   X    XXX    XXXXX   XXXXX    XXX    X   X
 	//	  X     XX  X   X       X   X   X   X   XX XX   X   X     X       X     X   X   XX  X
@@ -197,6 +212,11 @@ public class ToolBarBox : MonoBehaviour {
 		info_title		=	title;
 		info_about		=	content;
 		info_size		=	height;
+	}
+
+	public void setInformationsHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
+		if ( enterButton != null ) { button_informations.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
+		if ( exitButton != null ) { button_informations.GetComponent<ButtonBehaviour>().setOnMouseExit( exitButton ); }
 	}
 
 	// ----------------------------------------------------------------------
@@ -215,6 +235,11 @@ public class ToolBarBox : MonoBehaviour {
 	public void setExit( ActionEnd functionEnd, object[] args ) {
 		this.functionEnd	=	functionEnd;
 		this.objectsEnd		=	args;
+	}
+
+	public void setExitHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
+		if ( enterButton != null ) { button_exit.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
+		if ( exitButton != null ) { button_exit.GetComponent<ButtonBehaviour>().setOnMouseExit( exitButton ); }
 	}
 
 	// ----------------------------------------------------------------------

@@ -11,6 +11,18 @@ using UnityEngine.UI;
 //	XXXXX   X   X   X        XXX      X        XXXX     XXX    X   X
 // ################################################################################
 
+public enum ContentType {
+	Standard,
+	AutoCorrected,
+	IntegerNumber,
+	DecimalNumber,
+	Alphanumeric,
+	Name,
+	EmailAddress,
+	Password,
+	Pin
+}
+
 public class InputBox : MonoBehaviour {
 
 	// PRIVATE VARIABLES:
@@ -36,12 +48,13 @@ public class InputBox : MonoBehaviour {
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
 	
-	public void Init( string[] texts, InputBoxReturnAction functionOK, InputBoxCancelAction functionCancel, object[] args ) {
+	public void Init( string[] texts, ContentType contentType, InputBoxReturnAction functionOK, InputBoxCancelAction functionCancel, object[] args ) {
 		clearBox();
 		if ( texts.Length > 0 && texts[0] != null ) { text_title.GetComponent<Text>().text								=	texts[0]; }
 		if ( texts.Length > 1 && texts[1] != null ) { text_subtitle.GetComponent<Text>().text							=	texts[1]; }
 		if ( texts.Length > 2 && texts[2] != null ) { button_ok.transform.GetChild(0).GetComponent<Text>().text			=	texts[2]; }
 		if ( texts.Length > 3 && texts[3] != null ) { button_cancel.transform.GetChild(0).GetComponent<Text>().text		=	texts[3]; }
+		setContent( contentType );
 		ActionOK		=	functionOK;
 		ActionCancel	=	functionCancel;
 		action_objects	=	args;
@@ -98,6 +111,49 @@ public class InputBox : MonoBehaviour {
 	private void onButtonCancelClick() {
 		hideBox();
 		if ( ActionCancel != null ) { ActionCancel( action_objects ); }
+	}
+
+	// ######################################################################
+	//	 XXX     XXX    X   X   XXXXX   XXXXX   X   X   XXXXX
+	//	X   X   X   X   XX  X     X     X       XX  X     X  
+	//	X       X   X   X X X     X     XXX     X X X     X  
+	//	X   X   X   X   X  XX     X     X       X  XX     X  
+	//	 XXX     XXX    X   X     X     XXXXX   X   X     X  
+	// ######################################################################
+
+	private void setContent( ContentType contentType ) {
+		switch( contentType ) {
+		case ContentType.Standard:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.Standard;
+			break;
+		case ContentType.AutoCorrected:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.Autocorrected;
+			break;
+		case ContentType.DecimalNumber:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.DecimalNumber;
+			break;
+		case ContentType.IntegerNumber:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.IntegerNumber;
+			break;
+		case ContentType.Alphanumeric:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.Alphanumeric;
+			break;
+		case ContentType.EmailAddress:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.EmailAddress;
+			break;
+		case ContentType.Name:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.Name;
+			break;
+		case ContentType.Password:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.Password;
+			break;
+		case ContentType.Pin:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.Pin;
+			break;
+		default:
+			inputfield.GetComponent<InputField>().contentType	=	InputField.ContentType.Standard;
+			break;
+		}
 	}
 
 	// ######################################################################

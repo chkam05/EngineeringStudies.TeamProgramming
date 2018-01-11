@@ -24,7 +24,8 @@ public class TextRoll : MonoBehaviour {
 	private	string				activeText		=	"";
 
 	private float				timer			=	0.0f;
-	private	float				timerTick		=	0.15f;
+	private	float				timerTick		=	0.10f;
+	private	float				timerSpeed		=	0.01f;
 
 	// PUBLIC VARIABLES:
 	// ...
@@ -37,7 +38,7 @@ public class TextRoll : MonoBehaviour {
 	
 	// ----------------------------------------------------------------------
 	void Update () {
-		timer			+=	Time.deltaTime;
+		timer			+=	timerSpeed;
 
 		if ( timer >= timerTick ) {
 			timer		=	0.0f;

@@ -160,7 +160,7 @@ public class DedicatedTestScene : MonoBehaviour {
 
 	private void inputBoxInit() {
 		string[]	str_data	=	{ "Wprowadzanie danych", "Podaj swoje imię", "Akceptuj", "Zamknij" };
-		component_input.GetComponent<InputBox>().Init( str_data, inputBoxOK, inputBoxCancel, null );
+		component_input.GetComponent<InputBox>().Init( str_data, ContentType.Standard, inputBoxOK, inputBoxCancel, null );
 	}
 
 	// ----------------------------------------------------------------------
