@@ -26,6 +26,8 @@ public class MainMenu : MonoBehaviour {
 
 	private string				str_exit			=	"   Zamknij program i wróć do systemu operacyjnego. ";
 
+	private string				str_sett			=	"   Otwórz okno ustaień i konfiguracji aplikacji. ";
+
 	private string				str_information		=	"   Aplikacja: \"Maszyny Proste\", wersja 1.0, "
 													+	"stworzona w środowisku \"UNITY\".   "
 													+	"Autorzy: Agata Dziurka, Kamil Karpiński, Grzegorz Klauza.   "
@@ -36,8 +38,11 @@ public class MainMenu : MonoBehaviour {
 	public	GameObject			button_learn;
 	public	GameObject			button_test;
 	public	GameObject			button_exit;
+	public	GameObject			button_settings;
 	public	GameObject			rawimage_informations;
 	public	GameObject			text_informations;
+
+	public	GameObject			component_settings;
 
 	// ######################################################################
 	//	XXXXX   X   X   XXXXX   XXXXX
@@ -49,19 +54,24 @@ public class MainMenu : MonoBehaviour {
 
 	void Start () {
 		button_learn.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_learn.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_learn.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_learn.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 		button_test.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_test.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_test.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_test.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 		button_exit.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_exit.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_exit.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_exit.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
+		button_settings.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
+		button_settings.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
+		button_settings.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 		rawimage_informations.GetComponent<ButtonBehaviour>().setOnMouseOver( ImageMouseOverBehaviour );
 		rawimage_informations.GetComponent<ButtonBehaviour>().setOnMouseExit( ImageMouseExitBehaviour );
 
 		text_informations.GetComponent<Text>().text		=	str_welcome;
 		text_informations.GetComponent<TextRoll>().setText( str_welcome );
+
+		component_settings.GetComponent<SettingsBox>().Setup();
 	}
 
 	// ----------------------------------------------------------------------
@@ -94,6 +104,8 @@ public class MainMenu : MonoBehaviour {
 			text_informations.GetComponent<TextRoll>().setText( str_learn );
 		} else if ( current_button == button_exit ) {
 			text_informations.GetComponent<TextRoll>().setText( str_exit );
+		} else if ( current_button == button_settings ) {
+			text_informations.GetComponent<TextRoll>().setText( str_sett );
 		} else {
 			text_informations.GetComponent<TextRoll>().setText( str_welcome );
 		}
@@ -106,12 +118,14 @@ public class MainMenu : MonoBehaviour {
 		if ( (args[0] as GameObject).GetComponent<Button>() == null ) { return; }
 		var	current_button	=	args[0] as GameObject;
 
-		if ( current_button == button_test ) {
+		if ( current_button == button_learn ) {
 			SceneManager.LoadScene( "Menu 1" );
-		} else if ( current_button == button_learn ) {
+		} else if ( current_button == button_test ) {
 			SceneManager.LoadScene( "Menu 2" );
 		} else if ( current_button == button_exit ) {
 			Application.Quit();
+		} else if ( current_button == button_settings ) {
+			component_settings.GetComponent<SettingsBox>().Init( false );
 		}
 	}
 

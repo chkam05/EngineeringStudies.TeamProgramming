@@ -47,19 +47,19 @@ public class MenuTwo : MonoBehaviour {
 
 	void Start () {
 		button_block.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_block.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_block.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_block.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 		button_level.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_level.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_level.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_level.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 		button_crane.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_crane.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_crane.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_crane.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 		button_other.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_other.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_other.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_other.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 		button_exit.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
-		button_exit.GetComponent<ButtonBehaviour>().setOnMouseDoubleClick( ButtonMouseClickBehaviour );
+		button_exit.GetComponent<ButtonBehaviour>().setOnMouseClick( ButtonMouseClickBehaviour );
 		button_exit.GetComponent<ButtonBehaviour>().setOnMouseExit( ButtonMouseExitBehaviour );
 
 		text_informations.GetComponent<Text>().text		=	str_welcome;

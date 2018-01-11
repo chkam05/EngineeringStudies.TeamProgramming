@@ -57,6 +57,8 @@ public class ButtonBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExit
 		} else if ( onMouseClick != null ) {
 			onMouseClick( new object[] { gameObject, eventData } );
 		}
+
+		doubleClick		=	!doubleClick;
 	}
 
 	// ----------------------------------------------------------------------
