@@ -25,6 +25,7 @@ public class StatusBarBehaviour : MonoBehaviour {
 	private	object[]				objectsTimerExpired		=	null;
 	private	int						timer_max				=	0;
 	private	int						timer					=	0;
+	private int						timer_detector			=	0;
 	private	bool					timer_reverse			=	false;
 	private	string					string_informations		=	"    Informacje testowe StatusBar. ";
 	private	string					string_settings			=	"    Otwórz okno ustawień. ";
@@ -97,24 +98,33 @@ public class StatusBarBehaviour : MonoBehaviour {
 		this.timer_reverse			=	reverseTime;
 		this.functionTimerExpired	=	functionTimerExpired;
 		this.objectsTimerExpired	=	args;
+		this.timer					=	0;
 	}
 
 	// ----------------------------------------------------------------------
 	private void workTimer() {
-		if ( timer_reverse ) {
-			timer	=	timer_max - (int) Time.fixedTime;
-			if ( timer <= 0 ) { endTimer(); }
-		} else {
-			timer	=	(int) Time.fixedTime;
-			if ( timer >= timer_max ) { endTimer(); }
+		int		seconds		=	System.DateTime.Now.Second;
+		
+		if ( timer_detector != seconds ) {
+			timer_detector		=	seconds;
+
+			if ( timer_reverse ) {
+				timer			=	timer - 1;
+				if ( timer <= 0 ) { endTimer(); }
+			} else {
+				timer			=	timer + 1;
+				if ( timer >= timer_max ) { endTimer(); }
+			}
+
+			int		int_sec		=	timer % 60;
+			int		int_min		=	timer / 60 % 60;
+			int		int_hou		=	timer / 60 / 60;
+
+			string	str_time	=	((int_hou<10)?"0"+int_hou.ToString():int_hou.ToString()) + ":"
+								+	((int_min<10)?"0"+int_min.ToString():int_min.ToString()) + ":"
+								+	((int_sec<10)?"0"+int_sec.ToString():int_sec.ToString());
+			text_timer.GetComponent<Text>().text	=	str_time;
 		}
-
-		int		int_sec		=	timer % 60;
-		int		int_min		=	timer / 60 % 60;
-		int		int_hou		=	timer / 60 / 60;
-
-		string	str_time	=	((int_hou<10)?"0"+int_hou.ToString():int_hou.ToString())+":"+((int_min<10)?"0"+int_min.ToString():int_min.ToString())+":"+((int_sec<10)?"0"+int_sec.ToString():int_sec.ToString());
-		text_timer.GetComponent<Text>().text	=	str_time;
 	}
 
 	// ----------------------------------------------------------------------

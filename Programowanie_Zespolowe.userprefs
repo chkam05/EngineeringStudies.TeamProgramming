@@ -1,15 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Nauka\RowniaPochylaGame.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Nauka\RowniaPochylaUI.cs">
     <Files>
-      <File FileName="Assets\Scripts\UI\MainMenu.cs" Line="124" Column="31" />
-      <File FileName="Assets\Scripts\UIModules\ToolBarBox.cs" Line="243" Column="3" />
+      <File FileName="Assets\Scripts\UI\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UIModules\ToolBarBox.cs" Line="254" Column="3" />
       <File FileName="Assets\Scripts\Tools.cs" Line="79" Column="75" />
-      <File FileName="Assets\Scripts\Nauka\RowniaPochylaGame.cs" Line="45" Column="37" />
-      <File FileName="Assets\Scripts\Nauka\RowniaPochylaUI.cs" Line="179" Column="60" />
-      <File FileName="Assets\Scripts\UIModules\TextRoll.cs" Line="35" Column="52" />
+      <File FileName="Assets\Scripts\Nauka\RowniaPochylaGame.cs" Line="118" Column="36" />
+      <File FileName="Assets\Scripts\Nauka\RowniaPochylaUI.cs" Line="235" Column="60" />
       <File FileName="Assets\Scripts\UI\DedicatedTestScene.cs" Line="155" Column="50" />
-      <File FileName="Assets\Scripts\UIModules\InputBox.cs" Line="57" Column="29" />
+      <File FileName="Assets\Scripts\UIModules\StatusBarBehaviour.cs" Line="107" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

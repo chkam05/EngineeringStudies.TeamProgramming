@@ -254,6 +254,19 @@ public class ToolBarBox : MonoBehaviour {
 	}
 
 	// ######################################################################
+	//	 XXX    XXXXX   X   X   XXXXX   XXXX 
+	//	X   X     X     X   X   X       X   X
+	//	X   X     X     XXXXX   XXX     XXXX 
+	//	X   X     X     X   X   X       X   X
+	//	 XXX      X     X   X   XXXXX   X   X
+	// ######################################################################
+
+	public void contentPosition( float value ) {
+		if ( value < 0.0f || value > 1.0f ) { return; }
+		transform.GetChild(1).GetComponent<ScrollRect>().verticalScrollbar.value	=	value;
+	}
+
+	// ######################################################################
 
 }
 

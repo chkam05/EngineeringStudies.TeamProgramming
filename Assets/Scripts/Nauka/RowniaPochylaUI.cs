@@ -14,9 +14,12 @@ public class RowniaPochylaUI : MonoBehaviour {
 													+	" m - masa \n"
 													+	" g - przyspieszenie ziemskie = 9,81 [m/s^2] \n"
 													+	" alpha - kąt nachylenia równi do podłoża \n"
-													+	" n - siła reakcji podłoża \n"
+													+	" N - siła reakcji podłoża \n"
 													+	"\n"
 													+	" G = m*g \n"
+													+	" a = g * ( sin( alpha ) - u cos( alpha ) ) \n"
+													+	"\n"
+													+	" W przypadku kiedy tarcie wynosi 0 otrzymujemy: \n"
 													+	" a = sin( alpha ) * g \n";
 
 	private	string			str_star				=	"    Uruchom bądź zakończ symulację. ";
@@ -25,10 +28,11 @@ public class RowniaPochylaUI : MonoBehaviour {
 	private	string			str_exit				=	"    Wyjdź z trybu symulacji, podsumowując swój wynik. ";
 
 	private	string			str_input_M				=	"    Wprowadź masę objektu spadającego na równie pochyłą. ";
+	private	string			str_input_Friction		=	"    Współczynnik tarcia podłoża (Tarcia wspoczynkowego). ";
 	private	string			str_input_Alpha			=	"    Wprowadź kąt alpha nachylenia równi pochyłej. ";
 	private string			str_input_base			=	"    Wprowadź długość podstawy równi pochyłej. ";
 
-	private int				size_wzory				=	7 * 32;
+	private int				size_wzory				=	10 * 32;
 
 	// PUBLIC VARIABLES
 	public	GameObject		module_game;
@@ -42,6 +46,7 @@ public class RowniaPochylaUI : MonoBehaviour {
 	public	GameObject		component_settings;
 
 	public	GameObject		fieldinput_M;
+	public	GameObject		fieldinput_Friction;
 	public	GameObject		fieldinput_Alpha;
 	public	GameObject		fieldinput_base;
 	public	GameObject		fieldinput_G;
@@ -61,16 +66,21 @@ public class RowniaPochylaUI : MonoBehaviour {
 		component_settings.GetComponent<SettingsBox>().Setup();
 		component_description.GetComponent<DescriptionBox>().Init( "Wzory", str_wzory, size_wzory );
 		component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( str_teoria );
-		component_toolbar.GetComponent<ToolBarBox>().setInformations( "Wzory", str_wzory, size_wzory );
 
 		component_toolbar.GetComponent<ToolBarBox>().setStartStopHover( onButtonEnter, onButtonExit );
 		component_toolbar.GetComponent<ToolBarBox>().setAchivmnetsHover( onButtonEnter, onButtonExit );
 		component_toolbar.GetComponent<ToolBarBox>().setInformationsHover( onButtonEnter, onButtonExit );
 		component_toolbar.GetComponent<ToolBarBox>().setExitHover( onButtonEnter, onButtonExit );
 
+		component_toolbar.GetComponent<ToolBarBox>().setStartStop( functionStart, functionStop, null, null );
+		component_toolbar.GetComponent<ToolBarBox>().setInformations( "Wzory", str_wzory, size_wzory );
+
 		fieldinput_M.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseOver( onButtonEnter );
 		fieldinput_M.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
 		fieldinput_M.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
+		fieldinput_Friction.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseOver( onButtonEnter );
+		fieldinput_Friction.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
+		fieldinput_Friction.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
 		fieldinput_Alpha.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseOver( onButtonEnter );
 		fieldinput_Alpha.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
 		fieldinput_Alpha.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
@@ -78,7 +88,6 @@ public class RowniaPochylaUI : MonoBehaviour {
 		fieldinput_base.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
 		fieldinput_base.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
 
-		component_toolbar.GetComponent<ToolBarBox>().setStartStop( functionStart, functionStop, null, null );
 		Init();
 	}
 	
@@ -87,11 +96,13 @@ public class RowniaPochylaUI : MonoBehaviour {
 		float	alpha_angle		=	30.0f;
 		float	base_a			=	16.0f;
 		float	cube_mass		=	10.0f;
+		float	friction		=	0.4f;
 
-		fieldinput_M.GetComponent<InputField>().text		=	cube_mass.ToString();
-		fieldinput_Alpha.GetComponent<InputField>().text	=	alpha_angle.ToString();
-		fieldinput_base.GetComponent<InputField>().text		=	base_a.ToString();
-		setData( alpha_angle, base_a, cube_mass );
+		fieldinput_M.GetComponent<InputField>().text			=	cube_mass.ToString();
+		fieldinput_Friction.GetComponent<InputField>().text		=	friction.ToString();
+		fieldinput_Alpha.GetComponent<InputField>().text		=	alpha_angle.ToString();
+		fieldinput_base.GetComponent<InputField>().text			=	base_a.ToString();
+		setData( alpha_angle, base_a, cube_mass, friction );
 	}
 
 	// ----------------------------------------------------------------------
@@ -124,6 +135,8 @@ public class RowniaPochylaUI : MonoBehaviour {
 
 		} else if ( current_button == fieldinput_M.transform.GetChild(3).gameObject ) {
 			component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( str_input_M );
+		} else if ( current_button == fieldinput_Friction.transform.GetChild(3).gameObject ) {
+			component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( "" );
 		} else if ( current_button == fieldinput_Alpha.transform.GetChild(3).gameObject ) {
 			component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( str_input_Alpha );
 		} else if ( current_button == fieldinput_base.transform.GetChild(3).gameObject ) {
@@ -163,19 +176,25 @@ public class RowniaPochylaUI : MonoBehaviour {
 			object[]	obj_result	=	new object[] { fieldinput_M };
 			component_inputBox.GetComponent<InputBox>().Init( str_texts, ContentType.DecimalNumber, onInputBoxYes, null, obj_result );
 		
+		} else if ( current_button == fieldinput_Friction.transform.GetChild(3).gameObject ) {
+			string[]	str_texts	=	{ "Zmienna u:", str_input_Friction, "Wprowadź", "Anuluj" };
+			object[]	obj_result	=	new object[] { fieldinput_Friction };
+			component_inputBox.GetComponent<InputBox>().Init( str_texts, ContentType.DecimalNumber, onInputBoxYes, null, obj_result );
+
 		} else if ( current_button == fieldinput_Alpha.transform.GetChild(3).gameObject ) {
 			string[]	str_texts	=	{ "Zmienna Alpha:", str_input_Alpha, "Wprowadź", "Anuluj" };
 			object[]	obj_result	=	new object[] { fieldinput_Alpha };
 			component_inputBox.GetComponent<InputBox>().Init( str_texts, ContentType.DecimalNumber, onInputBoxYes, null, obj_result );
 		
 		} else if ( current_button == fieldinput_base.transform.GetChild(3).gameObject ) {
-			string[]	str_texts	=	{ "Zmienna podstawy:", str_input_base, "Wprowadź", "Anuluj" };
+			string[]	str_texts	=	{ "Długość podstawy:", str_input_base, "Wprowadź", "Anuluj" };
 			object[]	obj_result	=	new object[] { fieldinput_base };
 			component_inputBox.GetComponent<InputBox>().Init( str_texts, ContentType.DecimalNumber, onInputBoxYes, null, obj_result );
 		
 		}
 	}
 
+	// ----------------------------------------------------------------------
 	private void onInputBoxYes( string text, object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -184,9 +203,10 @@ public class RowniaPochylaUI : MonoBehaviour {
 
 		input_field.GetComponent<InputField>().text	=	text;
 		float	alpha_angle		=	float.Parse( fieldinput_Alpha.GetComponent<InputField>().text );
+		float	friction		=	float.Parse( fieldinput_Friction.GetComponent<InputField>().text );
 		float	base_a			=	float.Parse( fieldinput_base.GetComponent<InputField>().text );
 		float	cube_mass		=	float.Parse( fieldinput_M.GetComponent<InputField>().text );
-		setData( alpha_angle, base_a, cube_mass );
+		setData( alpha_angle, base_a, cube_mass, friction );
 	}
 
 	// ######################################################################
@@ -198,16 +218,32 @@ public class RowniaPochylaUI : MonoBehaviour {
 	// ######################################################################
 
 	public void functionStart( object[] args ) {
-		Time.timeScale	=	1.0f;
+		Time.timeScale			=	1.0f;
+		float	alpha_angle		=	float.Parse( fieldinput_Alpha.GetComponent<InputField>().text );
+		float	friction		=	float.Parse( fieldinput_Friction.GetComponent<InputField>().text );
+		float	cube_mass		=	float.Parse( fieldinput_M.GetComponent<InputField>().text );	 
+
+		//module_game.GetComponent<RowniaPochylaGame>().hideGhost();
+		fieldinput_G.GetComponent<InputField>().text	=	module_game.GetComponent<RowniaPochylaGame>().calculateG( cube_mass ).ToString() + " [kg * m/s^2]";
+		fieldinput_a.GetComponent<InputField>().text	=	module_game.GetComponent<RowniaPochylaGame>().calculatea( alpha_angle, friction ).ToString() + " [m/s^2]";
+		component_toolbar.GetComponent<ToolBarBox>().contentPosition( 0.0f );
 	}
 
+	// ----------------------------------------------------------------------
 	public void functionStop( object[] args ) {
 		Time.timeScale	=	0.0f;
 		module_game.GetComponent<RowniaPochylaGame>().resetCubeData();
+		//module_game.GetComponent<RowniaPochylaGame>().showGhost();
+
+		fieldinput_G.GetComponent<InputField>().text	=	"";
+		fieldinput_a.GetComponent<InputField>().text	=	"";
 	}
 
-	public void setData( float alpha_angle, float base_a, float cube_mass ) {
-		module_game.GetComponent<RowniaPochylaGame>().importData( alpha_angle, base_a, cube_mass );
+	// ----------------------------------------------------------------------
+	public void setData( float alpha_angle, float base_a, float cube_mass, float friction ) {
+		module_game.GetComponent<RowniaPochylaGame>().importData( alpha_angle, base_a, cube_mass, friction );
+		module_game.GetComponent<RowniaPochylaGame>().setGhost( alpha_angle );
+		//module_game.GetComponent<RowniaPochylaGame>().showGhost();
 	}
 
 	// ######################################################################

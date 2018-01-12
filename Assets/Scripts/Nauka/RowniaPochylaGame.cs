@@ -20,6 +20,7 @@ public class RowniaPochylaGame : MonoBehaviour {
 
 	public	GameObject		object_inclided_plane;
 	public	GameObject		object_cube;
+	public	GameObject		object_ghost;
 	public	GameObject		object_ground;
 
 	// ######################################################################
@@ -35,13 +36,6 @@ public class RowniaPochylaGame : MonoBehaviour {
 	//	OBLICZANIE ALPHA I DOSTOSOWANIE OBIEKTU 
 	// ######################################################################
 
-	public void importData( float alpha_angle, float base_a, float cube_mass ) {
-		calculateInclidedPlane( base_a, alpha_angle );
-		object_cube.GetComponent<Rigidbody2D>().mass	=	cube_mass;
-		prepareCubeData();
-	}
-
-	// ----------------------------------------------------------------------
 	private	void calculateInclidedPlaneScale() {
 		var			inclided_plane				=	object_inclided_plane.transform.GetChild(0).gameObject;
 		var			collider_points				=	object_inclided_plane.GetComponent<PolygonCollider2D>().points;
@@ -87,9 +81,67 @@ public class RowniaPochylaGame : MonoBehaviour {
 	}
 
 	// ######################################################################
+	//	OBLICZANIE ZMIENNYCH
+	// ######################################################################
+
+	public float calculatea( float alpha_angle, float friction ) {
+		float	g			=	9.81f;
+		float	sinus		=	Mathf.Sin( Tools.degreeToRadian(alpha_angle) );
+		float	u			=	friction;
+		float	cosinus		=	Mathf.Cos( Tools.degreeToRadian(alpha_angle) );
+		float	result_a	=	g * ( sinus - u * cosinus );
+
+		return result_a;
+	}
+
+	// ----------------------------------------------------------------------
+	public float calculateG( float cube_mass ) {
+		float	g			=	9.81f;
+		float	result_G	=	g * cube_mass;
+
+		return result_G;
+	}
+
+	// ######################################################################
+	//	RYSOWANIE SIŁ
+	// ######################################################################
+
+	public void setGhost( float angle ) {
+		var			inclided_plane				=	object_inclided_plane.transform.GetChild(0).gameObject;
+		var			collider_points				=	object_inclided_plane.GetComponent<PolygonCollider2D>().points;
+
+		float		center_point				=	collider_points[2].y - collider_points[0].y;
+		float		posX						=	1.0f;
+		float		posY						=	center_point / scale_diff + (1.0f * scale_diff);
+
+		object_ghost.transform.position			=	new Vector3( posX, posY, 0.0f );
+		object_ghost.transform.rotation			=	Quaternion.EulerAngles( new Vector3( 0.0f, 0.0f, Tools.degreeToRadian(angle) ) );
+		object_ghost.transform.GetChild(1).GetComponent<LineRenderer>().SetPosition( 0, new Vector3( posX, posY, -1.1f) );
+		object_ghost.transform.GetChild(1).GetComponent<LineRenderer>().SetPosition( 1, new Vector3( posX, posY - 4.0f, -1.1f) );
+	}
+
+	// ----------------------------------------------------------------------
+	public void showGhost() {
+		object_ghost.SetActive( true );
+	}
+
+	// ----------------------------------------------------------------------
+	public void hideGhost() {
+		object_ghost.SetActive( false );
+	}
+
+	// ######################################################################
 	//	CUBE DATA
 	// ######################################################################
 
+	public void importData( float alpha_angle, float base_a, float cube_mass, float friction ) {
+		calculateInclidedPlane( base_a, alpha_angle );
+		object_cube.GetComponent<Rigidbody2D>().mass	=	cube_mass;
+		object_inclided_plane.GetComponent<PolygonCollider2D>().sharedMaterial.friction		=	friction;
+		prepareCubeData();
+	}
+
+	// ----------------------------------------------------------------------
 	public void prepareCubeData() {
 		cube_position	=	object_cube.transform.position;
 		cube_rotation	=	object_cube.transform.rotation.eulerAngles;
