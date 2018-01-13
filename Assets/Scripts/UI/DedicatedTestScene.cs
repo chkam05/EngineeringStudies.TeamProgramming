@@ -22,6 +22,7 @@ public class DedicatedTestScene : MonoBehaviour {
 	public	GameObject			component_description;
 	public	GameObject			component_achivments;
 	public	GameObject			component_settings;
+	public	GameObject			component_console;
 	public	GameObject			component_input;
 	public	GameObject			component_messageQbox;
 	public	GameObject			component_messageIbox;
@@ -36,6 +37,7 @@ public class DedicatedTestScene : MonoBehaviour {
 	public	GameObject			button_messageIbox_test;
 	public	GameObject			button_winning_test;
 	public	GameObject			button_lossing_test;
+	public	GameObject			button_console;
 
 	// ######################################################################
 	//	XXXXX   X   X   XXXXX   XXXXX
@@ -58,6 +60,7 @@ public class DedicatedTestScene : MonoBehaviour {
 		button_messageIbox_test.GetComponent<Button>().onClick.AddListener( messageIBoxInit );
 		button_winning_test.GetComponent<Button>().onClick.AddListener( endingBoxInitWin );
 		button_lossing_test.GetComponent<Button>().onClick.AddListener( endingBoxInitLoose );
+		button_console.GetComponent<Button>().onClick.AddListener( initConsoleBox );
 
 		component_toolbar.GetComponent<ToolBarBox>().setStartStop(
 			delegate { component_messageIbox.GetComponent<MessageIBox>().Init( new string[] { "Debug", "Funkcja została uruchomiona." }, null, null ); },
@@ -142,6 +145,24 @@ public class DedicatedTestScene : MonoBehaviour {
 
 	private void settingsBoxInit() {
 		component_settings.GetComponent<SettingsBox>().Init( false );
+	}
+
+	// ######################################################################
+	//	XXXXX   XXXXX    XXXX   XXXXX
+	//	  X     X       X         X  
+	//	  X     XXX      XXX      X  
+	//	  X     X           X     X  
+	//	  X     XXXXX   XXXX      X  
+	//
+	//	 XXX     XXX    X   X    XXXX    XXX    X       XXXXX
+	//	X   X   X   X   XX  X   X       X   X   X       X    
+	//	X       X   X   X X X    XXX    X   X   X       XXX  
+	//	X   X   X   X   X  XX       X   X   X   X       X    
+	//	 XXX     XXX    X   X   XXXX     XXX    XXXXX   XXXXX
+	// ######################################################################
+
+	private void initConsoleBox() {
+		component_console.GetComponent<ConsoleBox>().Init();
 	}
 
 	// ######################################################################

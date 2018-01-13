@@ -9,7 +9,6 @@ public class RowniaPochylaUI : MonoBehaviour {
 
 	// PRIVATE VARIABLES
 	private	string			str_teoria				=	"    Brak teorii. ";
-
 	private string			str_wzory				=	" G - Ciężar \n"
 													+	" m - masa \n"
 													+	" g - przyspieszenie ziemskie = 9,81 [m/s^2] \n"

@@ -16,6 +16,7 @@ using UnityEngine.UI;
 		data_musicSound
 		data_musicDialog
 
+		data_playersCount
 		data_player( int )ID
 		data_player( data_player( int )ID )NAME";
 		data_player( data_player( int )ID )SURNAME";

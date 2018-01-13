@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Modules\RopeModule.cs" />
+     <Compile Include="Assets\Scripts\Nauka\BlokRuchomeGame.cs" />
+     <Compile Include="Assets\Scripts\Nauka\BlokRuchomeUI.cs" />
      <Compile Include="Assets\Scripts\Nauka\RowniaPochylaGame.cs" />
      <Compile Include="Assets\Scripts\Nauka\RowniaPochylaUI.cs" />
      <Compile Include="Assets\Scripts\Tools.cs" />
@@ -55,6 +58,7 @@
      <Compile Include="Assets\Scripts\UI\MenuTwo.cs" />
      <Compile Include="Assets\Scripts\UIModules\AchivmentBox.cs" />
      <Compile Include="Assets\Scripts\UIModules\ButtonBehaviour.cs" />
+     <Compile Include="Assets\Scripts\UIModules\ConsoleBox.cs" />
      <Compile Include="Assets\Scripts\UIModules\DescriptionBox.cs" />
      <Compile Include="Assets\Scripts\UIModules\EndingBox.cs" />
      <Compile Include="Assets\Scripts\UIModules\InputBox.cs" />
