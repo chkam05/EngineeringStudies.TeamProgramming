@@ -22,7 +22,10 @@ public class StatusBarBehaviour : MonoBehaviour {
 
 	// PRIVATE VARIABLES:
 	private ActionTimerExpired		functionTimerExpired	=	null;
+	private ActionButtonClick		functionButtonNext		=	null;
+	private ActionButtonClick		functionButtonPrevious	=	null;
 	private	object[]				objectsTimerExpired		=	null;
+
 	private	int						timer_max				=	0;
 	private	int						timer					=	0;
 	private int						timer_detector			=	0;
@@ -30,10 +33,14 @@ public class StatusBarBehaviour : MonoBehaviour {
 	private	string					string_informations		=	"    Informacje testowe StatusBar. ";
 	private	string					string_settings			=	"    Otwórz okno ustawień. ";
 	private	string					string_exit				=	"    Natychmiastowy powrót do menu. ";
+	private string					string_previous			=	"    Powrót do poprzedniej części. ";
+	private string					string_next				=	"    Przejście do następnej części. ";
 
 	// PUBLIC VARIABLES:
 	public	GameObject				button_settings;
 	public	GameObject				button_exit;
+	public	GameObject				button_previous;
+	public	GameObject				button_next;
 	public	GameObject				text_informations;
 	public	GameObject				text_timer;
 
@@ -41,6 +48,7 @@ public class StatusBarBehaviour : MonoBehaviour {
 	public	GameObject				component_messageQBox;
 
 	public	delegate void			ActionTimerExpired( object[] args );
+	public	delegate void			ActionButtonClick( object[] args );
 
 	// ######################################################################
 	//	XXXXX   X   X   XXXXX   XXXXX
@@ -134,6 +142,33 @@ public class StatusBarBehaviour : MonoBehaviour {
 	}
 
 	// ######################################################################
+	//	XXX     X   X   XXXXX   XXXXX    XXX    X   X    XXXX
+	//	X  X    X   X     X       X     X   X   XX  X   X    
+	//	XXXX    X   X     X       X     X   X   X X X    XXX 
+	//	X   X   X   X     X       X     X   X   X  XX       X
+	//	XXXX     XXX      X       X      XXX    X   X   XXXX
+	// ######################################################################
+
+	public void setNextFunction( ActionButtonClick function ) {
+		functionButtonNext	=	function;
+	}
+
+	// ----------------------------------------------------------------------
+	public void setPreviousFunction( ActionButtonClick function ) {
+		functionButtonPrevious	=	function;
+	}
+
+	// ----------------------------------------------------------------------
+	public void onNextButtonClick() {
+		if ( functionButtonNext != null ) { functionButtonNext( new object[] { } ); }
+	}
+
+	// ----------------------------------------------------------------------
+	public void onPreviousButtonClick() {
+		if ( functionButtonPrevious != null ) { functionButtonPrevious( new object[] { } ); }
+	}
+
+	// ######################################################################
 	//	XXXXX   X   X   XXXXX   XXXXX
 	//	X        X X      X       X  
 	//	XXX       X       X       X  
@@ -181,6 +216,10 @@ public class StatusBarBehaviour : MonoBehaviour {
 			changeInformations( string_settings );
 		} else if ( current_button == button_exit ) {
 			changeInformations( string_exit );
+		} else if ( current_button == button_previous ) {
+			changeInformations( string_previous );
+		} else if ( current_button == button_next ) {
+			changeInformations( string_next );
 		}
 	}
 
