@@ -137,6 +137,20 @@ public static class Tools {
 		return PlayerPrefs.GetFloat( key_competition, 0.0f );
 	}
 
+	// ----------------------------------------------------------------------
+	public static bool checkScoreComplete() {
+		int		playerID	=	PlayerPrefs.GetInt( "data_playerLastID", 0 );
+		
+		for ( int i=0; i<Tools.score_titles.Length; i++ ) {
+			float	current_score	=	Tools.loadScore( playerID, i );
+			if ( current_score < 50 ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	// ######################################################################
 	
 }

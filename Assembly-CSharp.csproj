@@ -46,13 +46,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Modules\RopeModule.cs" />
+     <Compile Include="Assets\Modules\RopeBuilder.cs" />
+     <Compile Include="Assets\Scripts\Addons\BouncingBalls.cs" />
+     <Compile Include="Assets\Scripts\Addons\BouncingBallsUI.cs" />
+     <Compile Include="Assets\Scripts\Debug\TestScene.cs" />
      <Compile Include="Assets\Scripts\Nauka\BlokRuchomeGame.cs" />
      <Compile Include="Assets\Scripts\Nauka\BlokRuchomeUI.cs" />
      <Compile Include="Assets\Scripts\Nauka\RowniaPochylaGame.cs" />
      <Compile Include="Assets\Scripts\Nauka\RowniaPochylaUI.cs" />
      <Compile Include="Assets\Scripts\Tools.cs" />
-     <Compile Include="Assets\Scripts\UI\DedicatedTestScene.cs" />
      <Compile Include="Assets\Scripts\UI\MainMenu.cs" />
      <Compile Include="Assets\Scripts\UI\MenuOne.cs" />
      <Compile Include="Assets\Scripts\UI\MenuTwo.cs" />
@@ -68,6 +70,7 @@
      <Compile Include="Assets\Scripts\UIModules\StatusBarBehaviour.cs" />
      <Compile Include="Assets\Scripts\UIModules\TextRoll.cs" />
      <Compile Include="Assets\Scripts\UIModules\ToolBarBox.cs" />
+     <Compile Include="Assets\Scripts\UIModules\WelcomeBox.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

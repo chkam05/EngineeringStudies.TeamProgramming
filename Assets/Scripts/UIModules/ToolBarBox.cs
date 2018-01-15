@@ -29,7 +29,7 @@ public class ToolBarBox : MonoBehaviour {
 	private	float			show_height				=	384.0f;
 	private	float			hide_height				=	128.0f;
 	private	float			show_controls			=	160.0f;
-	private	float			speed_animation			=	3.3f;
+	private	float			speed_animation			=	5.0f;
 
 	private	string			info_title				=	"Informacje";
 	private string			info_about				=	"Opis akcji do wykonania.";
@@ -105,6 +105,7 @@ public class ToolBarBox : MonoBehaviour {
 			show_animation	=	false;
 			show_status		=	true;
 			GetComponent<RectTransform>().sizeDelta		=	new Vector2( width, show_height );
+			button_openclose.transform.GetChild(0).GetComponent<RawImage>().texture		=	Resources.Load( "Images/icon_arrowup" ) as Texture;
 		}		
 	}
 
@@ -123,6 +124,7 @@ public class ToolBarBox : MonoBehaviour {
 			hide_animation	=	false;
 			show_status		=	false;
 			GetComponent<RectTransform>().sizeDelta		=	new Vector2( width, hide_height );
+			button_openclose.transform.GetChild(0).GetComponent<RawImage>().texture		=	Resources.Load( "Images/icon_arrowdown" ) as Texture;
 		}
 	}
 

@@ -106,13 +106,13 @@ public class MenuOne : MonoBehaviour {
 		var	current_button	=	args[0] as GameObject;
 
 		if ( current_button == button_block ) {
-			//
+			SceneManager.LoadScene( "Bloki Nieruchome Nauka" );
 		} else if ( current_button == button_level ) {
-			//
+			SceneManager.LoadScene( "Rownia Pochyla Nauka" );
 		} else if ( current_button == button_crane ) {
-			//
+			//SceneManager.LoadScene( "" );
 		} else if ( current_button == button_other ) {
-			//
+			if ( Tools.checkScoreComplete() ) { SceneManager.LoadScene( "Bouncing Balls" ); }
 		} else if ( current_button == button_exit ) {
 			SceneManager.LoadScene( "Main Menu" );
 		}

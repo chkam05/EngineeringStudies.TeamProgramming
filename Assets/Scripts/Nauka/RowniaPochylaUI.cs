@@ -43,6 +43,7 @@ public class RowniaPochylaUI : MonoBehaviour {
 	public	GameObject		component_messageQBox;
 	public	GameObject		component_messageIBox;
 	public	GameObject		component_settings;
+	public	GameObject		component_welcome;
 
 	public	GameObject		fieldinput_M;
 	public	GameObject		fieldinput_Friction;
@@ -86,6 +87,8 @@ public class RowniaPochylaUI : MonoBehaviour {
 		fieldinput_base.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseOver( onButtonEnter );
 		fieldinput_base.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
 		fieldinput_base.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
+
+		component_welcome.GetComponent<WelcomeBox>().Init( "Równia pochyła", "W tej części nauczysz się jak działa." );
 
 		Init();
 	}

@@ -79,7 +79,7 @@ public class MainMenu : MonoBehaviour {
 		
 		/* ---------- Debug KeyCode ---------- */
 		if ( Input.GetKey( KeyCode.LeftControl ) && Input.GetKey( KeyCode.LeftShift ) && Input.GetKey( KeyCode.D ) ) {
-			SceneManager.LoadScene( "UI Dedicated Test Scene" );
+			SceneManager.LoadScene( "UI Test Scene" );
 		}
 		
 	}

@@ -19,12 +19,14 @@ using UnityEngine.UI;
 //	XXXX    XXXXX   X   X   X   X     X     XXXXX    XXX     XXX    X   X
 // ################################################################################
 
-public class ButtonBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
+public class ButtonBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler {
 
 	// PRIVATE VARIABLES:
 	private	CustomButtonAction		onMouseOver;
 	private CustomButtonAction		onMouseClick;
 	private CustomButtonAction		onMouseDoubleClick;
+	private CustomButtonAction		onMouseDownClick;
+	private CustomButtonAction		onMouseUpRelease;
 	private CustomButtonAction		onMouseExit;
 
 	private	bool					doubleClick				=	false;
@@ -62,6 +64,16 @@ public class ButtonBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	}
 
 	// ----------------------------------------------------------------------
+	public void OnPointerDown( PointerEventData eventData ) {
+		if ( onMouseDownClick != null ) { onMouseDownClick( new object[] { gameObject, eventData } ); }
+	}
+
+	// ----------------------------------------------------------------------
+	public void OnPointerUp( PointerEventData eventData ) {
+		if ( onMouseUpRelease != null ) { onMouseUpRelease( new object[] { gameObject, eventData } ); }
+	}
+
+	// ----------------------------------------------------------------------
 	public void OnPointerExit( PointerEventData eventData ) {
 		if ( onMouseExit != null ) { onMouseExit( new object[] { gameObject, eventData } ); }
 	}
@@ -79,6 +91,16 @@ public class ButtonBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExit
 	// ----------------------------------------------------------------------
 	public void setOnMouseDoubleClick( CustomButtonAction function ) {
 		onMouseDoubleClick	=	function;
+	}
+
+	// ----------------------------------------------------------------------
+	public void setOnMouseDown( CustomButtonAction function ) {
+		onMouseDownClick	=	function;
+	}
+
+	// ----------------------------------------------------------------------
+	public void setOnMouseUp( CustomButtonAction function ) {
+		onMouseUpRelease	=	function;
 	}
 
 	// ----------------------------------------------------------------------

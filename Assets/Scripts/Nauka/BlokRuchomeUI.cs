@@ -28,6 +28,7 @@ public class BlokRuchomeUI : MonoBehaviour {
 	public	GameObject		component_messageQBox;
 	public	GameObject		component_messageIBox;
 	public	GameObject		component_settings;
+	public	GameObject		component_welcome;
 
 	// ######################################################################
 	//	XXXXX   X   X   XXXXX   XXXXX
@@ -51,6 +52,8 @@ public class BlokRuchomeUI : MonoBehaviour {
 
 		component_toolbar.GetComponent<ToolBarBox>().setStartStop( functionStart, functionStop, null, null );
 		component_toolbar.GetComponent<ToolBarBox>().setInformations( "Wzory", str_wzory, size_wzory );
+
+		component_welcome.GetComponent<WelcomeBox>().Init( "", "" );
 
 		Init();
 	}

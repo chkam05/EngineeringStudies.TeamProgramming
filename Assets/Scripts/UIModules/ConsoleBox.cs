@@ -91,8 +91,47 @@ public class ConsoleBox : MonoBehaviour {
 			string	argument	=	command.Substring( 16 );
 			commandSHOWACHIVMENTS( argument );
 
+		} else if ( command.Length >= 13 && command.ToLower().Substring( 0, 13 ) == "set achivment" ) {
+			int		argument	=	1;
+			bool	quote		=	false;
+			string	argument1	=	"";
+			string	argument2	=	"";
+			string	argument3	=	"";
+			
+			int	s	=	14;
+			int c	=	0;
+			for ( int i = 14; i < command.Length; i++ ) {
+				c	=	c + 1;
+
+				if ( command.Substring( i, 1 ) == "\"" ) {
+					quote	=	!quote;
+					if ( quote ) {
+						s	=	i + 1;
+						c	=	0;
+					} else {
+						c	=	c - 1;
+					}
+					continue;
+				}
+
+				if ( command.Substring( i, 1 ) == " " || i == command.Length - 1 ) {
+					if ( !quote ) {
+						if ( i == command.Length - 1 ) { c = c + 1; }
+						if ( argument == 1 ) { argument1	=	command.ToLower().Substring( s, c-1 ); }
+						if ( argument == 2 ) { argument2	=	command.ToLower().Substring( s, c-1 ); }
+						if ( argument == 3 ) { argument3	=	command.ToLower().Substring( s, c-1 ); }
+						s			=	i + 1;
+						c			=	0;
+						argument	=	argument + 1;
+						continue;
+					}
+				}
+			}
+			commandSETACHIVMENT( argument1, argument2, argument3 );
+
 		} else {
 			addLine( "[ ! ] Nieznana komenda" );
+
 		}
 	}
 
@@ -228,6 +267,40 @@ public class ConsoleBox : MonoBehaviour {
 		}
 
 		addLine( "" );
+	}
+
+	// ----------------------------------------------------------------------
+	private void commandSETACHIVMENT( string argument1, string argument2, string argument3 ) {
+		int		parse				=	0;
+		int		count				=	Tools.score_titles.Length;
+		string	argument_imie		=	PlayerPrefs.GetString( "data_player" + argument1 + "NAME", "null" );
+		string	argument_nazwisko	=	PlayerPrefs.GetString( "data_player" + argument1 + "SURNAME", "null" );
+
+		if ( !int.TryParse( argument1, out parse ) || argument_imie == "null" ) {
+			addLine( "[ ! ] Błędne ID gracza." );
+			addLine( "" );
+			return;
+
+		} else {
+			for ( int i = 0; i < count; i++ ) {
+				if ( argument2 == Tools.score_titles[i].ToLower() ) {
+					float	score	=	0.0f;
+					if ( float.TryParse( argument3, out score ) ) {
+						PlayerPrefs.SetFloat( "data_player" + argument1 + "achivment" + i.ToString() + "SCORE", score );
+						addLine( argument_imie + " " + argument_nazwisko + ":" );
+						addLine( Tools.score_titles[i] + " ustawiono na: " + score.ToString() );
+						addLine( "" );
+						return;
+					} else {
+						addLine( "[ ! ] Błąd przy wprowadzaniu danych: \"" + argument3 + "\"" );
+						addLine( "" );
+						return;
+					}
+				}
+			}
+			addLine( "[ ! ] Nie znaloeziono achivmentu o podanej nazwie: \"" + argument2 + "\"" );
+			addLine( "" );
+		}
 	}
 
 	// ######################################################################

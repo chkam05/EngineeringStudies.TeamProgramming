@@ -11,27 +11,42 @@ ModelImporter:
     100006: Lina_L
     100008: Lina_R
     100010: Lina_Zakrzywiona
+    100012: Chwytak_B
+    100014: Chwytak_F
+    100016: Klin_Dolny_Cylinder_016
     400000: //RootNode
     400002: Klin
     400004: Kolo
     400006: Lina_L
     400008: Lina_R
     400010: Lina_Zakrzywiona
+    400012: Chwytak_B
+    400014: Chwytak_F
+    400016: Klin_Dolny_Cylinder_016
     2300000: Klin
     2300002: Kolo
     2300004: Lina_L
     2300006: Lina_R
     2300008: Lina_Zakrzywiona
+    2300010: Chwytak_B
+    2300012: Chwytak_F
+    2300014: Klin_Dolny_Cylinder_016
     3300000: Klin
     3300002: Kolo
     3300004: Lina_L
     3300006: Lina_R
     3300008: Lina_Zakrzywiona
+    3300010: Chwytak_B
+    3300012: Chwytak_F
+    3300014: Klin_Dolny_Cylinder_016
     4300000: Lina_R
     4300002: Lina_L
     4300004: Lina_Zakrzywiona
     4300006: Klin
     4300008: Kolo
+    4300010: Chwytak_F
+    4300012: Chwytak_B
+    4300014: Klin_Dolny_Cylinder_016
     7400000: Default Take
     9500000: //RootNode
   materials:
