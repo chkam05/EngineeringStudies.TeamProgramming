@@ -1,16 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UIModules\StatusBarBehaviour.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Addons\BouncingBallsUI.cs">
     <Files>
       <File FileName="Assets\Scripts\Nauka\RowniaPochylaUI.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Debug\TestScene.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Nauka\BlokRuchomeUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\MainMenu.cs" Line="87" Column="1" />
-      <File FileName="Assets\Scripts\UIModules\ConsoleBox.cs" Line="289" Column="95" />
-      <File FileName="Assets\Scripts\Addons\BouncingBallsUI.cs" Line="89" Column="77" />
-      <File FileName="Assets\Scripts\UIModules\ToolBarBox.cs" Line="94" Column="32" />
-      <File FileName="Assets\Scripts\UIModules\AchivmentBox.cs" Line="15" Column="1" />
-      <File FileName="Assets\Scripts\UIModules\StatusBarBehaviour.cs" Line="162" Column="35" />
+      <File FileName="Assets\Scripts\UI\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UIModules\ConsoleBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Addons\BouncingBallsUI.cs" Line="70" Column="34" />
+      <File FileName="Assets\Scripts\UIModules\ToolBarBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UIModules\AchivmentBox.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UIModules\StatusBarBehaviour.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
