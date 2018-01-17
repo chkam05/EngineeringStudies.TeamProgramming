@@ -47,7 +47,15 @@ public class InputBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
-	
+	/// <summary>
+	/// Funkcja inicjująca okna wejściowego danych.
+	/// </summary>
+	/// <param name="texts"> Teksty, (Tytuł, Podtytuł, Przycisk Ok, Przycisk Anuluj). </param>
+	/// <param name="contentType"> Typ wprowadzanego tekstu. </param>
+	/// <param name="functionOK"> Funkcja wykonywana po zaakceptowaniu danych. </param>
+	/// <param name="functionCancel"> Funkcja wykonywana po anulowaniu. </param>
+	/// <param name="args"> Argumenty funkcji. </param>
+
 	public void Init( string[] texts, ContentType contentType, InputBoxReturnAction functionOK, InputBoxCancelAction functionCancel, object[] args ) {
 		clearBox();
 		if ( texts.Length > 0 && texts[0] != null ) { text_title.GetComponent<Text>().text								=	texts[0]; }
@@ -68,6 +76,9 @@ public class InputBox : MonoBehaviour {
 	//	X   X   X   X   X  XX   X   X   X   X   X       X   X
 	//	X   X   X   X   X   X   X   X    XXXX   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Czyszczenie okna wprowadzania.
+	/// </summary>
 
 	private void clearBox() {
 		ActionOK														=	null;
@@ -82,6 +93,10 @@ public class InputBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wyświetlająca okno wprowadzania.
+	/// </summary>
+
 	private void showBox() {
 		button_ok.GetComponent<Button>().onClick.AddListener( onButtonOKClick );
 		button_cancel.GetComponent<Button>().onClick.AddListener( onButtonCancelClick );
@@ -89,6 +104,10 @@ public class InputBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja ukrywająca okno wprowadzania.
+	/// </summary>
+
 	private void hideBox() {
 		gameObject.SetActive( false );
 	}
@@ -100,6 +119,9 @@ public class InputBox : MonoBehaviour {
 	//	  X     X  XX     X     X       X   X   X   X   X   X     X       X     X   X   X  XX
 	//	XXXXX   X   X     X     XXXXX   X   X   X   X    XXX      X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Funkcja przyciku akceptowania danych.
+	/// </summary>
 
 	private void onButtonOKClick() {
 		hideBox();
@@ -108,6 +130,10 @@ public class InputBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja przycisku anulowania danych.
+	/// </summary>
+
 	private void onButtonCancelClick() {
 		hideBox();
 		if ( ActionCancel != null ) { ActionCancel( action_objects ); }
@@ -120,6 +146,10 @@ public class InputBox : MonoBehaviour {
 	//	X   X   X   X   X  XX     X     X       X  XX     X  
 	//	 XXX     XXX    X   X     X     XXXXX   X   X     X  
 	// ######################################################################
+	/// <summary>
+	/// Funkcja ustawiająca typ wprowadzaego testu.
+	/// </summary>
+	/// <param name="contentType"> Typ wprowadzanego tekstu. </param>
 
 	private void setContent( ContentType contentType ) {
 		switch( contentType ) {

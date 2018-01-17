@@ -14,7 +14,6 @@ public static class Tools {
 
 	// PRIVATE VARIABLES:
 	private static	float[]		score			=	new float[3] { 50.0f, 70.0f, 90.0f };
-	private static	float		score_max		=	100.0f;
 
 	// PUBLIC VARIABLES:
 	//	...
@@ -53,10 +52,21 @@ public static class Tools {
 	//	X   X   X   X     X     X   X
 	//	X   X   X   X     x     X   X 
 	// ######################################################################
+	/// <summary>
+	/// Konwersja z radianów na stopnie. 
+	/// </summary>
+	/// <returns> Stopnie. </returns>
+	/// <param name="radian"> Radiany. </param>
 
 	public static float radianToDegree( float radian ) {
 		return ( radian * ( 180.0f / Mathf.PI ) );
 	}
+
+	/// <summary>
+	/// Konwersja ze stopni na radiany.
+	/// </summary>
+	/// <returns> Radiany. </returns>
+	/// <param name="radian"> Stopnie. </param>
 
 	public static float degreeToRadian( float degree ) {
 		return ( Mathf.PI * degree / 180.0f );
@@ -69,6 +79,11 @@ public static class Tools {
 	//	X   X   X   X   X       X   X   X   X       X
 	//	 XXX     XXX    XXXXX    XXX    X   X   XXXX 
 	// ######################################################################
+	/// <summary>
+	/// Konwersja kodu HTML na kolor
+	/// </summary>
+	/// <returns> Kolor </returns>
+	/// <param name="html"> Kod HTML koloru. </param>
 
 	public static Color HTMLToColor( string html ) {
 		Color	output	=	new Color( 1.0f, 1.0f, 1.0f, 1.0f );
@@ -77,6 +92,12 @@ public static class Tools {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Ustawia przeźroczystość koloru.
+	/// </summary>
+	/// <returns> Zwraca kolor. </returns>
+	/// <param name="color"> Kolor. </param>
+	/// <param name="alpha255"> Przeźroczystość 0 - 255. </param>
 
 	public static Color setAplha( Color color, int alpha255 ) {
 		Color	output	=	color;
@@ -91,22 +112,29 @@ public static class Tools {
 	//	    X   X   X   X   X   X   X   X    
 	//	XXXX     XXX     XXX    X   X   XXXXX
 	// ######################################################################
+	/// <summary>
+	/// Oblicza punktację.
+	/// </summary>
+	/// <returns> Ocena. </returns>
+	/// <param name="points"> Ilość uzyskanych punktów </param>
+	/// <param name="maxPoints"> Maksymalna ilość punktów. </param>
 
-	public static void scoreSet( float minBronze, float minSilver, float minGold, float maxPoints ) {
-		score[0]	=	minBronze;
-		score[1]	=	minSilver;
-		score[2]	=	minGold;
-		score_max	=	maxPoints;
-	}
-
-	// ----------------------------------------------------------------------
 	public static float scalePoints( float points, float maxPoints ) {
 		//	maxPoints	=	score_max
 		//	points		=	return
-		return	(( score_max * points ) / maxPoints);
+		//	maxPoints * return	=	score_max * points
+		//	return	=	( score_max * points ) / maxPoints
+
+		return	(( 100.0f * points ) / maxPoints);
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Konwersja punktacji na oceny.
+	/// </summary>
+	/// <returns> Wynik w postaci typu zakończenia. </returns>
+	/// <param name="points"> Punktacja. </param>
+
 	public static EndingBox.EndingType scoreResult( float points ) {
 		if ( (points) >= score[2] ) { return EndingBox.EndingType.gold; }
 		else if ( (points) >= score[1] ) { return EndingBox.EndingType.silver; }
@@ -121,6 +149,12 @@ public static class Tools {
 	//	    X   X   X   X   X   X   X   X              X   X   X    X X    X    
 	//	XXXX     XXX     XXX    X   X   XXXXX      XXXX    X   X     X     XXXXX
 	// ######################################################################
+	/// <summary>
+	/// Zapisuje punktacje tekstu dla wybranego gracza.
+	/// </summary>
+	/// <param name="playerID"> ID gracza. </param>
+	/// <param name="indexCompetition"> Indeks testu. </param>
+	/// <param name="score"> Punktacja. </param>
 
 	public static void saveScore( int playerID, int indexCompetition, float score ) {
 		string	key_competition		=	"data_player" + playerID.ToString() + "achivment" + indexCompetition.ToString() + "SCORE";
@@ -131,6 +165,13 @@ public static class Tools {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pobiera informacje o teście.
+	/// </summary>
+	/// <returns> Punktacja. </returns>
+	/// <param name="playerID"> ID gracza. </param>
+	/// <param name="indexCompetition"> Indeks testu. </param>
+
 	public static float loadScore( int playerID, int indexCompetition ) {
 		string	key_competition		=	"data_player" + playerID.ToString() + "achivment" + indexCompetition.ToString() + "SCORE";
 
@@ -138,6 +179,11 @@ public static class Tools {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Sprawdza czy zakończono wszystkie testy pozytywnie.
+	/// </summary>
+	/// <returns> True - tak, False - nie. </returns>
+
 	public static bool checkScoreComplete() {
 		int		playerID	=	PlayerPrefs.GetInt( "data_playerLastID", 0 );
 		

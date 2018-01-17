@@ -30,12 +30,19 @@ public class ConsoleBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
+	/// <summary>
+	/// Funkcja pokazująca okno poleceń.
+	/// </summary>
 
 	public void	Init() {
 		gameObject.SetActive( true );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wykonuje polecenia wykonywane w czasie rzeczywistym.
+	/// </summary>
+
 	void Update() {
 		if ( inputfield_text.GetComponent<InputField>().isFocused && inputfield_text.GetComponent<InputField>().text != "" && Input.GetKey( KeyCode.Return ) ) {
 			string	temp_command								=	inputfield_text.GetComponent<InputField>().text;
@@ -45,6 +52,10 @@ public class ConsoleBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja zamyka okno poleceń.
+	/// </summary>
+
 	private void closeCommands() {
 		gameObject.SetActive( false );
 	}
@@ -56,6 +67,10 @@ public class ConsoleBox : MonoBehaviour {
 	//	  X     X        X X      X  
 	//	  X     XXXXX   X   X     X  
 	// ######################################################################
+	/// <summary>
+	/// Funkcja oczekująca na polecenie i analizująca je.
+	/// </summary>
+	/// <param name="command"> Polecenie wejściowe. </param>
 
 	private void proceedCommand( string command ) {
 		if ( command == "" ) { return; }
@@ -142,6 +157,10 @@ public class ConsoleBox : MonoBehaviour {
 	//	X   X     X  
 	//	 XXX    XXXXX
 	// ######################################################################
+	/// <summary>
+	/// Funkcja dodająca tekst do linii poleceń.
+	/// </summary>
+	/// <param name="line"> Tekst. </param>
 
 	private void addLine( string line ) {
 		string	temp							=	text_text.GetComponent<Text>().text;
@@ -150,6 +169,10 @@ public class ConsoleBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja rozszerzająca rozmiar linii poleceń i przewijająca je na dół.
+	/// </summary>
+
 	private void setUI() {
 		var		temp											=	container_text.GetComponent<RectTransform>().sizeDelta;
 		container_text.GetComponent<RectTransform>().sizeDelta	=	new Vector2( temp.x, temp.y + text_height );
@@ -163,6 +186,9 @@ public class ConsoleBox : MonoBehaviour {
 	//	X   X   X   X   X   X   X   X   X   X   X  XX    X  X       X
 	//	 XXX     XXX    X   X   X   X   X   X   X   X   XXXX    XXXX 
 	// ######################################################################
+	/// <summary>
+	/// Wyświetla pomoc.
+	/// </summary>
 
 	private void commandHELP() {
 		addLine( "" );
@@ -186,12 +212,21 @@ public class ConsoleBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wyświetla wpisany tekst.
+	/// </summary>
+	/// <param name="argument"> Tekst. </param>
+
 	private void commandECHO( string argument ) {
 		addLine( argument );
 		addLine( "" );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wyświetla listę ID graczy.
+	/// </summary>
+
 	private void commandLISTPLAYERS() {
 		int	players_count	=	PlayerPrefs.GetInt( "data_playersCount", 0 );
 		
@@ -203,6 +238,10 @@ public class ConsoleBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wyświetla informacje o graczach.
+	/// </summary>
+
 	private void commandSHOWPLAYERS() {
 		int	players_count	=	PlayerPrefs.GetInt( "data_playersCount", 0 );
 		
@@ -221,6 +260,11 @@ public class ConsoleBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wyświetla informacje o graczu.
+	/// </summary>
+	/// <param name="argument"> ID Gracza. </param>
+
 	private void commandSHOWPLAYER( string argument ) {
 		int		parse				=	0;
 		string	argument_imie		=	PlayerPrefs.GetString( "data_player" + argument + "NAME", "null" );
@@ -243,6 +287,11 @@ public class ConsoleBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wyświetla postępy gracza.
+	/// </summary>
+	/// <param name="argument"> ID Gracza. </param>
+
 	private void commandSHOWACHIVMENTS( string argument ) {
 		int		parse				=	0;
 		int		count				=	Tools.score_titles.Length;
@@ -270,6 +319,13 @@ public class ConsoleBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Ustawia odpowiedni postęp gracza o ustaloną wartość.
+	/// </summary>
+	/// <param name="argument1"> ID Gracza. </param>
+	/// <param name="argument2"> Nazwa postępu. </param>
+	/// <param name="argument3"> Postęp od 0 do 100. </param>
+
 	private void commandSETACHIVMENT( string argument1, string argument2, string argument3 ) {
 		int		parse				=	0;
 		int		count				=	Tools.score_titles.Length;

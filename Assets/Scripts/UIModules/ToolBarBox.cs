@@ -58,6 +58,9 @@ public class ToolBarBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
+	/// <summary>
+	/// Uruchamia konfigurację wszystkich komponentów
+	/// </summary>
 
 	void Start () {
 		button_openclose.GetComponent<Button>().onClick.AddListener( animationReactor );
@@ -69,6 +72,10 @@ public class ToolBarBox : MonoBehaviour {
 	}
 	
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonywująca akcje w czasie rzeczywistym.
+	/// </summary>
+
 	void Update () {
 		if ( show_animation ) { showAnimation(); }
 		if ( hide_animation ) { hideAnimation(); }
@@ -82,6 +89,10 @@ public class ToolBarBox : MonoBehaviour {
 	//	X   X   X   X   XXXXX   X   X   X   X     X     XXXXX    XXX    X   X
 	// ######################################################################
 
+	/// <summary>
+	/// Funckja reakcji na animacje.
+	/// </summary>
+
 	private	void animationReactor() {
 		if (show_status) {
 			hide_animation=true;
@@ -91,6 +102,10 @@ public class ToolBarBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Animacja otwarcia okna narzędzi.
+	/// </summary>
+
 	private void showAnimation() {
 		float	width	=	GetComponent<RectTransform>().sizeDelta.x;
 		float	height	=	GetComponent<RectTransform>().sizeDelta.y;
@@ -110,6 +125,10 @@ public class ToolBarBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Animacja zamknięcia okna narzędzi.
+	/// </summary>
+
 	private void hideAnimation() {
 		float	width	=	GetComponent<RectTransform>().sizeDelta.x;
 		float	height	=	GetComponent<RectTransform>().sizeDelta.y;
@@ -142,6 +161,14 @@ public class ToolBarBox : MonoBehaviour {
 	//	XXXX      X      XXX    X    
 	// ######################################################################
 
+	/// <summary>
+	/// Ustawia funkcje na wybrane akcje w oknie narzędzi.
+	/// </summary>
+	/// <param name="functionStart"> Funkcja start. </param>
+	/// <param name="functionStop"> funkcja stop. </param>
+	/// <param name="argsStart"> Argumenty funkcji start. </param>
+	/// <param name="argsStop"> Argumenty funkcji stop. </param>
+
 	public void setStartStop( ActionStart functionStart, ActionStop functionStop, object[] argsStart, object[] argsStop ) {
 		this.functionStart		=	functionStart;
 		this.functionStop		=	functionStop;
@@ -149,12 +176,23 @@ public class ToolBarBox : MonoBehaviour {
 		this.objectsStop		=	argsStop;
 	}
 
+	/// <summary>
+	/// Ustawia funkcje na najechanie kursorem na przycisku wybranych akcje w oknie narzędzi.
+	/// </summary>
+	/// <param name="enterButton"> Funkcja najechania kursorem. </param>
+	/// <param name="exitButton"> Funkcja opuszczenia kursorem. </param>
+
 	public void setStartStopHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
 		if ( enterButton != null ) { button_startstop.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
 		if ( exitButton != null ) { button_startstop.GetComponent<ButtonBehaviour>().setOnMouseExit( exitButton ); }
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja zarządzająca trybem symulacji.
+	/// </summary>
+	/// <param name="activeStatus"> Aktywna, nie aktywna. </param>
+
 	public void manualStartStop( bool activeStatus ) {
 		startstop_status	=	activeStatus;
 		if ( activeStatus ) { ssStart(); }
@@ -162,12 +200,20 @@ public class ToolBarBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja przełączająca tryb symulacji.
+	/// </summary>
+
 	private void startstopReactor() {
 		if ( startstop_status ) { ssStop(); }
 		else { ssStart(); }
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonywująca się podczas startu symulacji.
+	/// </summary>
+
 	private void ssStart() {
 		if ( startstop_status ) { return; }
 		if ( functionStart != null ) { functionStart( objectsStart ); }
@@ -177,6 +223,10 @@ public class ToolBarBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonywująca się podczas zakończenia symulacji.
+	/// </summary>
+
 	private void ssStop() {
 		if ( !startstop_status ) { return; }
 		if ( functionStop != null ) { functionStop( objectsStop ); }
@@ -192,10 +242,19 @@ public class ToolBarBox : MonoBehaviour {
 	//	X   X   X   X   X   X     X      X X    X   X   X       X  XX     X         X
 	//	X   X    XXX    X   X   XXXXX     X     X   X   XXXXX   X   X     X     XXXX 
 	// ######################################################################
+	/// <summary>
+	/// Inicjacja komponentu okna postępów.
+	/// </summary>
 
 	private void achivmentBoxInit() {
 		component_achivments.GetComponent<AchivmentBox>().Init();
 	}
+
+	/// <summary>
+	/// Ustawia funckje na najechanie kursorem na przycisku wybranych akcje w oknie narzędzi.
+	/// </summary>
+	/// <param name="enterButton"> Funkcja najechania kursorem. </param>
+	/// <param name="exitButton"> Funkcja opuszczenia kursorem. </param>
 
 	public void setAchivmnetsHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
 		if ( enterButton != null ) { button_achivments.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
@@ -209,6 +268,12 @@ public class ToolBarBox : MonoBehaviour {
 	//	  X     X  XX   X       X   X   X   X   X   X   X   X     X       X     X   X   X  XX
 	//	XXXXX   X   X   X        XXX    X   X   X   X   X   X     X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Funkcja konfigurująca podstawowy tekst okna informacji.
+	/// </summary>
+	/// <param name="title"> Tytuł okna. </param>
+	/// <param name="content"> Tekst. </param>
+	/// <param name="height"> Wysokość okna. </param>
 
 	public void setInformations( string title, string content, int height ) {
 		info_title		=	title;
@@ -216,12 +281,22 @@ public class ToolBarBox : MonoBehaviour {
 		info_size		=	height;
 	}
 
+	/// <summary>
+	/// Ustawia funckje na najechanie kursorem na przycisku wybranych akcje w oknie narzędzi.
+	/// </summary>
+	/// <param name="enterButton"> Funkcja najechania kursorem. </param>
+	/// <param name="exitButton"> Funkcja opuszczenia kursorem. </param>
+
 	public void setInformationsHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
 		if ( enterButton != null ) { button_informations.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
 		if ( exitButton != null ) { button_informations.GetComponent<ButtonBehaviour>().setOnMouseExit( exitButton ); }
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja pokazująca informacje
+	/// </summary>
+
 	private void showInformations() {
 		component_informations.GetComponent<DescriptionBox>().Init( info_title, info_about, info_size );
 	}
@@ -233,11 +308,22 @@ public class ToolBarBox : MonoBehaviour {
 	//	X        X X      X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
+	/// <summary>
+	/// Ustawia funkcję na przycisk wyjścia.
+	/// </summary>
+	/// <param name="functionEnd"> Funkcja zamykająca. </param>
+	/// <param name="args"> Argumenty funkcji. </param>
 
 	public void setExit( ActionEnd functionEnd, object[] args ) {
 		this.functionEnd	=	functionEnd;
 		this.objectsEnd		=	args;
 	}
+
+	/// <summary>
+	/// Ustawia funckje na najechanie kursorem na przycisku wybranych akcje w oknie narzędzi.
+	/// </summary>
+	/// <param name="enterButton"> Funkcja najechania kursorem. </param>
+	/// <param name="exitButton"> Funkcja opuszczenia kursorem. </param>
 
 	public void setExitHover( ButtonBehaviour.CustomButtonAction enterButton, ButtonBehaviour.CustomButtonAction exitButton ) {
 		if ( enterButton != null ) { button_exit.GetComponent<ButtonBehaviour>().setOnMouseOver( enterButton ); }
@@ -245,12 +331,21 @@ public class ToolBarBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonywana po naciśnięciu na przycisk wyjścia
+	/// </summary>
+
 	private void onExitClick() {
 		string[]	str_data	=	{ "Kończenie", "Czy napewno chcesz zakończyć zadanie?", "Tak, zakończ", "Nie, kontynuuj" };
 		component_messageQBox.GetComponent<MessageQBox>().Init( str_data, onExitYes, null, objectsEnd );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonywana po zaakceptowaniu wyjścia
+	/// </summary>
+	/// <param name="args">Arguments.</param>
+
 	private void onExitYes( object[] args ) {
 		if ( functionEnd != null ) { functionEnd( args ); }
 	}
@@ -262,6 +357,10 @@ public class ToolBarBox : MonoBehaviour {
 	//	X   X     X     X   X   X       X   X
 	//	 XXX      X     X   X   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Ustwienie pozycji okna paska narzędzi
+	/// </summary>
+	/// <param name="value"> Wartość 0 - dół, 1 - góra. </param>
 
 	public void contentPosition( float value ) {
 		if ( value < 0.0f || value > 1.0f ) { return; }

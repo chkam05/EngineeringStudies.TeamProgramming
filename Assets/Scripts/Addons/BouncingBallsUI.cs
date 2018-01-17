@@ -72,6 +72,9 @@ public class BouncingBallsUI : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
+	/// <summary>
+	/// KOnfiguracja komponentów UI
+	/// </summary>
 
 	void Start () {
 		functionStop( null );
@@ -125,15 +128,14 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 	
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pzypisanie danych wejściowych komponentowi warstwy 3D
+	/// </summary>
+
 	private void Init() {
 		updateGravity( module_game.GetComponent<BouncingBalls>().getGravity() );
 		updateSpeed( module_game.GetComponent<BouncingBalls>().getSpeed() );
 		updateBall( current_ball );
-	}
-
-	// ----------------------------------------------------------------------
-	void Update () {
-		//
 	}
 
 	// ######################################################################
@@ -149,6 +151,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	//	X   X   X   X     X       X     X   X   X  XX       X
 	//	XXXX     XXX      X       X      XXX    X   X   XXXX
 	// ######################################################################
+	/// <summary>
+	/// Wybranie poprzedniej piłki.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	private void onButtonPreviousClick( object[] args ) {
 		if ( current_ball <= 0 ) { return; }
@@ -156,6 +162,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wybranie następnej piłki.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	private void onButtonNextClick( object[] args ) {
 		if ( current_ball >= module_game.GetComponent<BouncingBalls>().balls.Count ) { return; }
@@ -163,6 +173,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Usunięcie wybranej piłki.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	private void onButtonRemoveClick( object[] args ) {
 		if ( module_game.GetComponent<BouncingBalls>().balls.Count <= 1 ) { return; }
@@ -170,6 +184,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Dodanie nowej piłki.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	private void onButtonAddClick( object[] args ) {
 		if ( module_game.GetComponent<BouncingBalls>().balls.Count >= 10 ) { return; }
@@ -183,6 +201,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	//	X   X   X   X   X       X           X
 	//	XXXX    X   X   XXXXX   XXXXX   XXXX 
 	// ######################################################################
+	/// <summary>
+	/// Pobranie informacji o piłce.
+	/// </summary>
+	/// <param name="index"> Numer piłki. </param>
 
 	public void updateBall( int index ) {
 		if ( index >= 0 && index < module_game.GetComponent<BouncingBalls>().balls.Count ) {
@@ -197,6 +219,11 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Przypisanie konfiguracji wybranej piłce.
+	/// </summary>
+	/// <param name="index"> Numer piłki. </param>
+
 	private void setBallData( int index ) {
 		if ( index >= 0 && index < module_game.GetComponent<BouncingBalls>().balls.Count ) {
 			float	mass		=	float.Parse( fieldinput_M.GetComponent<InputField>().text );
@@ -208,22 +235,40 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pobranie informacji o grawitacji
+	/// </summary>
+	/// <param name="gravity"> True - jest, False - brak. </param>
+
 	public void updateGravity( bool gravity ) {
 		toggle_Gravity.GetComponent<Toggle>().isOn	=	gravity;
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pobranie informacji o przyspieszeniu piłek.
+	/// </summary>
+	/// <param name="speed"> Przyspieszenie piłek. </param>
+
 	public void updateSpeed( float speed ) {
 		fieldinput_a.GetComponent<InputField>().text	=	speed.ToString();
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Ustawienie grawitacji.
+	/// </summary>
+
 	private void setGravity() {
 		bool	gravity		=	toggle_Gravity.GetComponent<Toggle>().isOn;
 		module_game.GetComponent<BouncingBalls>().setGravity( !gravity );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Ustawienie szybkości.
+	/// </summary>
+
 	private void setSpeed() {
 		float	speed	=	float.Parse( fieldinput_a.GetComponent<InputField>().text );
 		module_game.GetComponent<BouncingBalls>().setSpeed( speed );
@@ -236,6 +281,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	//	X   X   X   X     X       X     X   X   X  XX       X
 	//	XXXX     XXX      X       X      XXX    X   X   XXXX
 	// ######################################################################
+	/// <summary>
+	/// Funkcja wykonująca się po najechaniu kursorem na przycisk
+	/// </summary>
+	/// <param name="args"> Przycisk. </param>
 
 	private void onButtonEnter( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
@@ -276,6 +325,11 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca się po opuszceniu kursora z przycisku
+	/// </summary>
+	/// <param name="args"> Przycisk. </param>
+
 	private void onButtonExit( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -291,6 +345,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	//	  X     X   X   X   X   X   X   X       X           X
 	//	  X      XXX     XXXX    XXXX   XXXXX   XXXXX   XXXX
 	// ######################################################################
+	/// <summary>
+	/// Funkcja wykonująca się po najechaniu kursorem na komponent checkbox
+	/// </summary>
+	/// <param name="args"> CheckBox. </param>
 
 	private void onToggleEnter( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
@@ -304,6 +362,11 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca się po wybraniu przez kursor komponentu checkbox
+	/// </summary>
+	/// <param name="args"> CheckBox. </param>
+
 	private void onToggleDown( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -316,6 +379,11 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca się po puszceniu kursora z komponentu checkbox
+	/// </summary>
+	/// <param name="args"> CheckBox. </param>
+
 	private void onToggleUp( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -329,6 +397,11 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca się po opuszceniu kursora z komponentu checkbox
+	/// </summary>
+	/// <param name="args"> CheckBox. </param>
+
 	private void onToggleExit( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -344,6 +417,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	//	  X     X  XX   X       X   X     X        X   X   X   X    X X 
 	//	XXXXX   X   X   X        XXX      X        XXXX     XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Funckja wykonująca się po otwarciu InputBoxów
+	/// </summary>
+	/// <param name="args"> Arguments. </param>
 
 	private void onInputBox( object[] args ) {
 		//if ( Time.timeScale > 0.0f ) { return; }
@@ -378,6 +455,12 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca się po zaakceptowaniu danych z InputBoxów
+	/// </summary>
+	/// <param name="text"> Tekst zwrotny. </param>
+	/// <param name="args"> InputBox. </param>
+
 	private void onInputBoxYes( string text, object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -409,6 +492,10 @@ public class BouncingBallsUI : MonoBehaviour {
 	//	X   X   X   X   X   X   X    
 	//	 XXXX   X   X   X   X   XXXXX
 	// ######################################################################
+	/// <summary>
+	/// Uruchomienie symulacji.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	public void functionStart( object[] args ) {
 		Time.timeScale			=	1.0f;
@@ -417,14 +504,14 @@ public class BouncingBallsUI : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Zakończenie symulacji.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
+
 	public void functionStop( object[] args ) {
 		Time.timeScale	=	0.0f;
 		module_game.GetComponent<BouncingBalls>().resetSimulation();
-	}
-
-	// ----------------------------------------------------------------------
-	public void setData( float alpha_angle, float base_a, float cube_mass, float friction ) {
-		//
 	}
 
 	// ######################################################################

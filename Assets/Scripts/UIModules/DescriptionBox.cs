@@ -35,6 +35,9 @@ public class DescriptionBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
+	/// <summary>
+	/// Uruchamia konfigurację wszystkich komponentów
+	/// </summary>
 
 	public void Init ( string title, string text, int size ) {
 		button_close.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -57,12 +60,19 @@ public class DescriptionBox : MonoBehaviour {
 	//	  X     X  XX     X     X       X   X   X   X   X   X     X       X     X   X   X  XX
 	//	XXXXX   X   X     X     XXXXX   X   X   X   X    XXX      X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Funkcja pokazująca okno informacji
+	/// </summary>
 
 	private void openBox() {
 		gameObject.SetActive( true );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja zamykająca okno informacji.
+	/// </summary>
+
 	private void closeBox() {
 		gameObject.SetActive( false );
 	}

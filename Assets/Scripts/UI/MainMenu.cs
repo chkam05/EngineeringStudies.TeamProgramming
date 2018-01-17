@@ -51,6 +51,9 @@ public class MainMenu : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
+	/// <summary>
+	/// Uruchamia konfigurację wszystkich komponentów
+	/// </summary>
 
 	void Start () {
 		button_learn.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
@@ -75,6 +78,10 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wykonuje polecenia wykonywane w czasie rzeczywistym.
+	/// </summary>
+
 	void Update() {
 		
 		/* ---------- Debug KeyCode ---------- */
@@ -91,6 +98,10 @@ public class MainMenu : MonoBehaviour {
 	//	X   X   X   X     X       X     X   X   X  XX       X
 	//	XXXX     XXX      X       X      XXX    X   X   XXXX
 	// ######################################################################
+	/// <summary>
+	/// Funkcja wykonująca akcję po najechaniu na przycisk.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	public void ButtonMouseOverBehavior( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
@@ -112,6 +123,11 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca akcję po kliknięciu na przycisk.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
+
 	public void ButtonMouseClickBehaviour( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -130,6 +146,11 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca akcję po opuszczeniu przycisku przez kursor.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
+
 	public void ButtonMouseExitBehaviour( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -145,6 +166,10 @@ public class MainMenu : MonoBehaviour {
 	//	  X     X   X   X   X   X   X   X    
 	//	XXXXX   X   X   X   X    XXXX   XXXXX
 	// ######################################################################
+	/// <summary>
+	/// Funkcja wykonująca akcję po najechaniu na obrazek.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	public void ImageMouseOverBehaviour( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
@@ -156,6 +181,11 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca akcję po opuszczeniu obrazka przez kursor.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
+
 	public void ImageMouseExitBehaviour( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }

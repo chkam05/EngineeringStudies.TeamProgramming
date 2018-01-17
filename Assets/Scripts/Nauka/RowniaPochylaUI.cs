@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // ################################################################################
@@ -88,8 +89,8 @@ public class RowniaPochylaUI : MonoBehaviour {
 		fieldinput_base.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
 		fieldinput_base.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
 
+		component_toolbar.GetComponent<ToolBarBox>().setExit( onExitClick, null );
 		component_welcome.GetComponent<WelcomeBox>().Init( "Równia pochyła", "W tej części nauczysz się jak działa." );
-
 		Init();
 	}
 	
@@ -110,6 +111,18 @@ public class RowniaPochylaUI : MonoBehaviour {
 	// ----------------------------------------------------------------------
 	void Update () {
 		//
+	}
+
+	// ######################################################################
+	//	X   X   XXXXX   X   X   XXXXX
+	//	XX  X   X        X X      X  
+	//	X X X   XXX       X       X  
+	//	X  XX   X        X X      X  
+	//	X   X   XXXXX   X   X     X  
+	// ######################################################################
+
+	private void onExitClick( object[] args ) {
+		SceneManager.LoadScene( "Main Menu" );
 	}
 
 	// ######################################################################

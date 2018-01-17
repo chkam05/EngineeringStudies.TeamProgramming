@@ -41,7 +41,14 @@ public class EndingBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
-	
+	/// <summary>
+	/// Funkcja konfigurująca okno zakończenia.
+	/// </summary>
+	/// <param name="texts"> Teksty, (Tytuł, Podtytuł, Przycisk OK). </param>
+	/// <param name="functionOK"> Funkcja dla przycisku OK. </param>
+	/// <param name="endingType"> Typ zakończenia. </param>
+	/// <param name="args"> Argumenty dla funkcji. </param>
+
 	public void Init( string[] texts, EndingBoxOKAction functionOK, EndingType endingType, object[] args ) {
 		clearBox();
 		if ( texts.Length > 0 && texts[0] != null ) { text_title.GetComponent<Text>().text								=	texts[0]; }
@@ -84,6 +91,9 @@ public class EndingBox : MonoBehaviour {
 	//	X   X   X   X   X  XX   X   X   X   X   X       X   X
 	//	X   X   X   X   X   X   X   X    XXXX   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Czyści okno zakończenia.
+	/// </summary>
 
 	private void clearBox() {
 		ActionOK														=	null;
@@ -96,12 +106,20 @@ public class EndingBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pokazuje okno zakończenia.
+	/// </summary>
+
 	private void showBox() {
 		button_ok.GetComponent<Button>().onClick.AddListener( onButtonOKClick );
 		gameObject.SetActive( true );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Zamyka okno zakończenia.
+	/// </summary>
+
 	private void hideBox() {
 		gameObject.SetActive( false );
 	}
@@ -113,6 +131,9 @@ public class EndingBox : MonoBehaviour {
 	//	  X     X  XX     X     X       X   X   X   X   X   X     X       X     X   X   X  XX
 	//	XXXXX   X   X     X     XXXXX   X   X   X   X    XXX      X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Funkcja wykonująca się po naciśnięciu przycisku OK.
+	/// </summary>
 
 	private void onButtonOKClick() {
 		hideBox();

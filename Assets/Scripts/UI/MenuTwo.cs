@@ -44,6 +44,9 @@ public class MenuTwo : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
+	/// <summary>
+	/// Uruchamia konfigurację wszystkich komponentów
+	/// </summary>
 
 	void Start () {
 		button_block.GetComponent<ButtonBehaviour>().setOnMouseOver( ButtonMouseOverBehavior );
@@ -73,6 +76,10 @@ public class MenuTwo : MonoBehaviour {
 	//	X   X   X   X     X       X     X   X   X  XX       X
 	//	XXXX     XXX      X       X      XXX    X   X   XXXX
 	// ######################################################################
+	/// <summary>
+	/// Funkcja wykonująca akcję po najechaniu na przycisk.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
 
 	public void ButtonMouseOverBehavior( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
@@ -96,6 +103,11 @@ public class MenuTwo : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca akcję po kliknięciu na przycisk.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
+
 	public void ButtonMouseClickBehaviour( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
@@ -103,11 +115,11 @@ public class MenuTwo : MonoBehaviour {
 		var	current_button	=	args[0] as GameObject;
 
 		if ( current_button == button_block ) {
-			//
+			SceneManager.LoadScene( "Bloki Nieruchome Test" );
 		} else if ( current_button == button_level ) {
-			//
+			SceneManager.LoadScene( "Rownia Pochyla Test" );
 		} else if ( current_button == button_crane ) {
-			//
+			SceneManager.LoadScene( "Dzwignia jednostronna Test" );
 		} else if ( current_button == button_other ) {
 			//
 		} else if ( current_button == button_exit ) {
@@ -116,6 +128,11 @@ public class MenuTwo : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca akcję po opuszczeniu przycisku przez kursor.
+	/// </summary>
+	/// <param name="args">Arguments.</param>
+
 	public void ButtonMouseExitBehaviour( object[] args ) {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }

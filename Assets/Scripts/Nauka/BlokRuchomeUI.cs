@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // ################################################################################
@@ -15,6 +16,7 @@ public class BlokRuchomeUI : MonoBehaviour {
 	private string			str_achv				=	"    Pokaż okno postępów. ";
 	private string			str_info				=	"    Pokaż informacje na temat tego zadania. ";
 	private	string			str_exit				=	"    Wyjdź z trybu symulacji, podsumowując swój wynik. ";
+	private	string			str_back				=	"    Poprzednia część: Bloki stałe. W tej części nauczysz się jak działają. ";
 
 	private int				size_wzory				=	10 * 32;
 
@@ -30,6 +32,13 @@ public class BlokRuchomeUI : MonoBehaviour {
 	public	GameObject		component_settings;
 	public	GameObject		component_welcome;
 
+	public	GameObject		fieldInput_M1;
+	public	GameObject		fieldInput_T;
+	public	GameObject		fieldInput_r;
+	public	GameObject		fieldInput_F1;
+	public	GameObject		fieldInput_P;
+	public	GameObject		fieldInput_Q;
+
 	// ######################################################################
 	//	XXXXX   X   X   XXXXX   XXXXX
 	//	  X     XX  X     X       X  
@@ -39,7 +48,7 @@ public class BlokRuchomeUI : MonoBehaviour {
 	// ######################################################################
 
 	void Start () {
-		functionStop( null );
+		Time.timeScale	=	0.0f;
 
 		component_settings.GetComponent<SettingsBox>().Setup();
 		component_description.GetComponent<DescriptionBox>().Init( "Wzory", str_wzory, size_wzory );
@@ -53,19 +62,45 @@ public class BlokRuchomeUI : MonoBehaviour {
 		component_toolbar.GetComponent<ToolBarBox>().setStartStop( functionStart, functionStop, null, null );
 		component_toolbar.GetComponent<ToolBarBox>().setInformations( "Wzory", str_wzory, size_wzory );
 
-		component_welcome.GetComponent<WelcomeBox>().Init( "", "" );
+		fieldInput_M1.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseOver( onButtonEnter );
+		fieldInput_M1.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
+		fieldInput_M1.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
+		fieldInput_T.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseOver( onButtonEnter );
+		fieldInput_T.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseClick( onInputBox );
+		fieldInput_T.transform.GetChild(2).GetComponent<ButtonBehaviour>().setOnMouseExit( onButtonExit );
 
+		component_toolbar.GetComponent<ToolBarBox>().setExit( onExitClick, null );
+		component_statusbar.GetComponent<StatusBarBehaviour>().setPreviousFunction( onPreviousClick, str_back );
+		component_welcome.GetComponent<WelcomeBox>().Init( "Bloki ruchome", "W tej części nauczysz się jak działają." );
 		Init();
 	}
 	
 	// ----------------------------------------------------------------------
 	private void Init() {
-		//
+		fieldInput_M1.GetComponent<InputField>().text	=	(20.0f).ToString();
+		fieldInput_T.GetComponent<InputField>().text	=	(0.1f).ToString();
+		fieldInput_r.GetComponent<InputField>().text	=	(2.0f).ToString();
 	}
 
 	// ----------------------------------------------------------------------
 	void Update () {
 		//
+	}
+
+	// ######################################################################
+	//	X   X   XXXXX   X   X   XXXXX
+	//	XX  X   X        X X      X  
+	//	X X X   XXX       X       X  
+	//	X  XX   X        X X      X  
+	//	X   X   XXXXX   X   X     X  
+	// ######################################################################
+
+	private void onPreviousClick( object[] args ) {
+		SceneManager.LoadScene( "Bloki Nieruchome Nauka" );
+	}
+
+	private void onExitClick( object[] args ) {
+		SceneManager.LoadScene( "Main Menu" );
 	}
 
 	// ######################################################################
@@ -91,6 +126,11 @@ public class BlokRuchomeUI : MonoBehaviour {
 		} else if ( current_button.name == "Button Exit" ) {
 			component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( str_exit );
 
+		} else if ( current_button == fieldInput_M1.transform.GetChild(3).gameObject ) {
+			component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( "" );
+		} else if ( current_button == fieldInput_T.transform.GetChild(3).gameObject ) {
+			component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( "" );
+		
 		} else {
 			component_statusbar.GetComponent<StatusBarBehaviour>().setInformations( str_teoria );
 		}
@@ -121,6 +161,17 @@ public class BlokRuchomeUI : MonoBehaviour {
 		if ( (args[0] as GameObject).GetComponent<Button>() == null ) { return; }
 		var	current_button	=	args[0] as GameObject;
 
+		if ( current_button == fieldInput_M1.transform.GetChild(3).gameObject ) {
+			string[]	str_texts	=	{ "Zmienna M:", "", "Wprowadź", "Anuluj" };
+			object[]	obj_result	=	new object[] { fieldInput_M1 };
+			component_inputBox.GetComponent<InputBox>().Init( str_texts, ContentType.DecimalNumber, onInputBoxYes, null, obj_result );
+		
+		} else if ( current_button == fieldInput_T.transform.GetChild(3).gameObject ) {
+			string[]	str_texts	=	{ "Zmienna Alpha:", "", "Wprowadź", "Anuluj" };
+			object[]	obj_result	=	new object[] { fieldInput_T };
+			component_inputBox.GetComponent<InputBox>().Init( str_texts, ContentType.DecimalNumber, onInputBoxYes, null, obj_result );
+		
+		}
 	}
 
 	// ----------------------------------------------------------------------
@@ -128,9 +179,16 @@ public class BlokRuchomeUI : MonoBehaviour {
 		if ( args.Length <= 0 ) { return; }
 		if ( args[0].GetType() != typeof(GameObject) ) { return; }
 		if ( (args[0] as GameObject).GetComponent<InputField>() == null ) { return; }
-		var	input_field			=	args[0] as GameObject;
+		var		input_field		=	args[0] as GameObject;
+		float	data;
 
-		input_field.GetComponent<InputField>().text	=	text;
+		if ( !float.TryParse( input_field.GetComponent<InputField>().text, out data ) ) { return; }
+
+		if ( input_field == fieldInput_T ) {
+			if ( data < 0.0f || data > 1.0f ) { return; }
+		}
+
+		input_field.GetComponent<InputField>().text		=	text;
 	}
 
 	// ######################################################################
@@ -144,17 +202,33 @@ public class BlokRuchomeUI : MonoBehaviour {
 	public void functionStart( object[] args ) {
 		Time.timeScale			=	1.0f;
 		
+		setData();
 		component_toolbar.GetComponent<ToolBarBox>().contentPosition( 0.0f );
 	}
 
 	// ----------------------------------------------------------------------
 	public void functionStop( object[] args ) {
 		Time.timeScale	=	0.0f;
+		module_game.GetComponent<BlokRuchomeGame>().resetData();
+
+		fieldInput_F1.GetComponent<InputField>().text	=	"";
+		fieldInput_P.GetComponent<InputField>().text	=	"";
+		fieldInput_Q.GetComponent<InputField>().text	=	"";
 	}
 
 	// ----------------------------------------------------------------------
-	public void setData( float alpha_angle, float base_a, float cube_mass, float friction ) {
-		//
+	public void setData() {
+		float	mass1		=	float.Parse( fieldInput_M1.GetComponent<InputField>().text );
+		float	friction	=	float.Parse( fieldInput_T.GetComponent<InputField>().text );
+		float	r			=	float.Parse( fieldInput_r.GetComponent<InputField>().text );
+		module_game.GetComponent<BlokRuchomeGame>().setData( mass1, friction, r );
+	}
+
+	// ----------------------------------------------------------------------
+	public void updateData( float f1, float p, float q ) {
+		fieldInput_F1.GetComponent<InputField>().text	=	f1.ToString();
+		fieldInput_P.GetComponent<InputField>().text	=	p.ToString();
+		fieldInput_Q.GetComponent<InputField>().text	=	q.ToString();
 	}
 
 	// ######################################################################

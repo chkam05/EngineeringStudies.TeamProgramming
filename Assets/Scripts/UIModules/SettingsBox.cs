@@ -89,7 +89,10 @@ public class SettingsBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
-	
+	/// <summary>
+	/// Funkcja inicjująca komonenty modułu ustawień.
+	/// </summary>
+
 	public void Setup() {
 		button_player.GetComponent<Button>().onClick.AddListener( openPlayerPage );
 		button_sound.GetComponent<Button>().onClick.AddListener( openSoundPage );
@@ -109,15 +112,15 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja uruchamiająca okno ustawień.
+	/// </summary>
+	/// <param name="in_game"> Informacja o tym skąd zostało menu uruchomione (Tak - w grze), (Nie w menu) </param>
+
 	public void Init( bool in_game ) {
 		this.in_game	=	in_game;
 		showBox();
 		if ( in_game ) { openSoundPage(); } else { openPlayerPage(); }
-	}
-
-	// ----------------------------------------------------------------------
-	void Update() {
-		
 	}
 
 	// ######################################################################
@@ -127,6 +130,9 @@ public class SettingsBox : MonoBehaviour {
 	//	  X     X  XX     X     X       X   X   X   X   X   X     X       X     X   X   X  XX
 	//	XXXXX   X   X     X     XXXXX   X   X   X   X    XXX      X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Zamknięcei otwartej karty.
+	/// </summary>
 
 	private void clearPage() {
 		container_player.SetActive( false );
@@ -136,6 +142,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Otwarcie karty ustawień gracza.
+	/// </summary>
+
 	private void openPlayerPage() {
 		if ( in_game ) { return; }
 		clearPage();
@@ -146,6 +156,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Otwarcie karty ustawień dźwięku.
+	/// </summary>
+
 	private void openSoundPage() {
 		clearPage();
 		loadSoundData();
@@ -154,6 +168,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Otwarcie karty podglądu wyników.
+	/// </summary>
+
 	private void openScorePage() {
 		clearPage();
 		loadScoreData();
@@ -162,6 +180,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Otwarcie karty informacji.
+	/// </summary>
+
 	private void openInfoPage() {
 		clearPage();
 		container_informations.SetActive( true );
@@ -169,6 +191,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca się po naciśnięciu zapisu ustawień
+	/// </summary>
+
 	private void onSaveButtonClick() {
 		if ( active_page == null ) { return; }
 		if ( active_page == container_player ) { saveCurrentPlayer(); }
@@ -176,6 +202,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wykonująca się po naciśnięciu wyjścia z ustawień
+	/// </summary>
+
 	private void onCloseButtonClick() {
 		hideBox();
 	}
@@ -193,12 +223,19 @@ public class SettingsBox : MonoBehaviour {
 	//	X   X   X   X   X  XX   X   X   X   X   X       X   X
 	//	X   X   X   X   X   X   X   X    XXXX   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Generowanie ID gracza
+	/// </summary>
+	/// <returns> ID gracza. </returns>
 
 	private int randomPlayerID() {
 		return Random.Range( 0, int.MaxValue );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Załadowanie informacji o graczach.
+	/// </summary>
 
 	private void loadPlayersData() {
 		int 			players_count		=	PlayerPrefs.GetInt( "data_playersCount", 1 );
@@ -228,6 +265,9 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Zapis aktywnego gracza.
+	/// </summary>
 
 	private void saveCurrentPlayer() {
 		string	key_playerLastIndex		=	"data_playerLastIndex";
@@ -238,6 +278,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Aktualizacja listy graczy.
+	/// </summary>
+	/// <param name="players_title"> Lista nazw graczy. </param>
 
 	private void updatePlayersList( List<string> players_title ) {
 		dropdown_player.GetComponent<Dropdown>().ClearOptions();
@@ -245,12 +289,21 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ######################################################################
+	/// <summary>
+	/// Sprawdza czy gracz został zmieniony.
+	/// </summary>
+	/// <param name="args"> Argumenty funkcji. </param>
+
 	private void detectPlayerChange( object[] args ) {
 		//Debug.Log( "detector" );
 		changePlayer_detector		=	true;
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Akcja wykonywana podczas zmiany gracza.
+	/// </summary>
+	/// <param name="index"> Indeks wybranego gracza. </param>
 
 	private void changePlayer( int index ) {
 		if ( changePlayer_detector ) {
@@ -278,6 +331,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja dodająca gracza.
+	/// </summary>
+
 	private void addPlayer() {
 		int		players_count		=	PlayerPrefs.GetInt( "data_playersCount", 1 );
 		int		players_newCount	=	players_count+1;
@@ -303,6 +360,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja aktualizująca informacje o graczu.
+	/// </summary>
+
 	private void updatePlayer() {
 		//string	key_playerID		=	"data_player" + changePlayer_current.ToString() + "ID";
 		string	key_playerName		=	"data_player" + changePlayer_currentID.ToString() + "NAME";
@@ -321,6 +382,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja usuwająca gracza.
+	/// </summary>
+
 	private void removePlayer() {
 		int		players_count			=	PlayerPrefs.GetInt( "data_playersCount", 1 );
 		if ( players_count <= 1 ) { return; }
@@ -347,6 +412,11 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja uporządkowująca listę graczy po usunięciu jednego z nich.
+	/// </summary>
+	/// <param name="index">Index.</param>
+
 	private void arrangePlayers( int index ) {
 		int		players_count			=	PlayerPrefs.GetInt( "data_playersCount", 1 );
 
@@ -363,6 +433,13 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ######################################################################
+	/// <summary>
+	/// Ustawienie wyświetlanej daty urodzenia gracza
+	/// </summary>
+	/// <param name="dayData"> Dzień miesiąca </param>
+	/// <param name="monthData"> Miesiąc roku. </param>
+	/// <param name="yearData"> Rok. </param>
+
 	private void setDate( int dayData, int monthData, int yearData ) {
 		dropdown_playerYear.GetComponent<Dropdown>().value		=	yearData;
 		dropdown_playerMonth.GetComponent<Dropdown>().value		=	monthData;
@@ -371,6 +448,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Konfiguracja listy lat.
+	/// </summary>
+
 	private void prepareYears() {
 		List<string>	years		=	new List<string>();
 		int				year_end	=	2017;
@@ -395,6 +476,12 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Konfiguracja listy dni
+	/// </summary>
+	/// <param name="month"> Wybrany miesiąc. </param>
+	/// <param name="year"> Wybray rok. </param>
+
 	private void prepareDay( int month, int year ) {
 		List<string>	days		=	new List<string>();
 		int				days_init	=	1;
@@ -419,6 +506,11 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Fnkcja wykonująca się po zmianie wybranego roku.
+	/// </summary>
+	/// <param name="index"> Pozycja roku w liście. </param>
+
 	private void changeYear( int index ) {
 		int		year_data		=		dropdown_playerYear.GetComponent<Dropdown>().value;
 		int		month_data		=		dropdown_playerMonth.GetComponent<Dropdown>().value;
@@ -427,6 +519,11 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Fnkcja wykonująca się po zmianie wybranego miesiąca.
+	/// </summary>
+	/// <param name="index"> Pozycja miesiąca w liście. </param>
+
 	private void changeMonth( int index ) {
 		int		year_data		=		dropdown_playerYear.GetComponent<Dropdown>().value;
 		int		month_data		=		dropdown_playerMonth.GetComponent<Dropdown>().value;
@@ -447,6 +544,9 @@ public class SettingsBox : MonoBehaviour {
 	//	X   X   X   X   X  XX   X   X   X   X   X       X   X
 	//	X   X   X   X   X   X   X   X    XXXX   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Załaduj ustawienia dźwięku.
+	/// </summary>
 
 	private void loadSoundData() {
 		slider_music.GetComponent<Slider>().value	=	PlayerPrefs.GetFloat( "data_musicMusic", 50.0f );
@@ -455,6 +555,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Zapisz ustawienia dźwięku
+	/// </summary>
+
 	private void saveSoundData() {
 		PlayerPrefs.SetFloat( "data_musicMusic", slider_music.GetComponent<Slider>().value );
 		PlayerPrefs.SetFloat( "data_musicSound", slider_sound.GetComponent<Slider>().value );
@@ -474,6 +578,9 @@ public class SettingsBox : MonoBehaviour {
 	//	X   X   X   X   X  XX   X   X   X   X   X       X   X
 	//	X   X   X   X   X   X   X   X    XXXX   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Załaduj informacje o postępach.
+	/// </summary>
 
 	private void loadScoreData() {
 		deleteRepresentationScoreItems();
@@ -529,6 +636,10 @@ public class SettingsBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Usuń informacje o postępach.
+	/// </summary>
+
 	private void deleteRepresentationScoreItems() {
 		if ( score_items != null ) {
 			foreach( GameObject item in score_items ) { GameObject.Destroy( item ); }
@@ -544,12 +655,19 @@ public class SettingsBox : MonoBehaviour {
 	//	XX XX     X     X  XX    X  X   X   X   XX XX
 	//	X   X   XXXXX   X   X   XXXX     XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Otwórz okno ustawień
+	/// </summary>
 
 	private void showBox() {
 		gameObject.SetActive( true );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Zamknij okno ustawień.
+	/// </summary>
+
 	private void hideBox() {
 		gameObject.SetActive( false );
 	}

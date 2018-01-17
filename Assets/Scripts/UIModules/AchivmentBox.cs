@@ -39,6 +39,11 @@ public class AchivmentBox : MonoBehaviour {
 		//	...
 
 		// ############################################################
+		/// <summary>
+		/// Funkcja tworząca <see cref="AchivmentBox+Achivment"/> jako zadanie dla testu.
+		/// </summary>
+		/// <param name="title"> Nazwa zadania. </param>
+		/// <param name="description"> Opis zadania. </param>
 
 		public Achivment( string title, string description ) {
 			this.title				=	title;
@@ -48,11 +53,21 @@ public class AchivmentBox : MonoBehaviour {
 		}
 
 		// ------------------------------------------------------------
+		/// <summary>
+		/// Funkcja ustawia status dla zadania (czy np zostało skończone).
+		/// </summary>
+		/// <param name="status"> Nowy status. </param>
+
 		public void setStatus( AchivmentType status ) { 
 			this.status				=	status;
 		}
 
 		// ------------------------------------------------------------
+		/// <summary>
+		/// Ustawienie innego obrazka dla zadania.
+		/// </summary>
+		/// <param name="resource"> Adres obrazka w Resources. </param>
+
 		public void setCustomImageResource( string resource ) {
 			this.res_customImage	=	resource;
 		}
@@ -89,7 +104,10 @@ public class AchivmentBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
-	
+	/// <summary>
+	/// Uruchamia konfigurację wszystkich komponentów
+	/// </summary>
+
 	public void Setup() {
 		this.achivments			=	new List<Achivment>();
 		this.achivment_items	=	new List<GameObject>();
@@ -98,6 +116,9 @@ public class AchivmentBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wywoławcza dla komponentu.
+	/// </summary>
 	public void Init() {
 		showBox();
 	}
@@ -109,6 +130,12 @@ public class AchivmentBox : MonoBehaviour {
 	//	X   X   X   X   X   X     X      X X    X   X   X       X  XX     X         X
 	//	X   X    XXX    X   X   XXXXX     X     X   X   XXXXX   X   X     X     XXXX 
 	// ######################################################################
+	/// <summary>
+	/// Funkcja dodaje nowe zadanie.
+	/// </summary>
+	/// <param name="title"> Tytuł zadania. </param>
+	/// <param name="description"> Opis zadania. </param>
+	/// <param name="res_image"> Adres innego obrazka w Resources </param>
 
 	public void addAchivment( string title, string description, string res_image ) {
 		Achivment	achivment	=	new Achivment( title, description );
@@ -118,6 +145,12 @@ public class AchivmentBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Zmiana statusu dla wybranego zadania.
+	/// </summary>
+	/// <param name="index"> Numer wybranego zadania. </param>
+	/// <param name="status"> Nowy status wybranego zadania. </param>
+
 	public void changeAchivmentStatus( int index, AchivmentType status ) {
 		if ( index >= 0 && index < achivments.Count ) {
 			achivments[index].setStatus( status );
@@ -126,6 +159,11 @@ public class AchivmentBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja usuwa zadanie z listy
+	/// </summary>
+	/// <param name="index"> Numer usuwanego zadania. </param>
+
 	public void removeAchivment( int index ) {
 		if ( index >= 0 && index < achivments.Count ) {
 			achivments.RemoveAt( index );
@@ -140,6 +178,9 @@ public class AchivmentBox : MonoBehaviour {
 	//	X   X   X   X   X  XX   X   X   X   X   X       X   X
 	//	X   X   X   X   X   X   X   X    XXXX   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Czyszczenie ekranu pokazującego zadania.
+	/// </summary>
 
 	private void clearBox() {
 		for ( int i = 0; i < achivment_items.Count; i++ ) {
@@ -149,6 +190,10 @@ public class AchivmentBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Generowanie pól dla pokazania zadań.
+	/// </summary>
+
 	private void updateBox() {
 		clearBox();
 		
@@ -197,12 +242,20 @@ public class AchivmentBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pokazanie okna z zadaniami.
+	/// </summary>
+
 	private void showBox() {
 		updateBox();
 		gameObject.SetActive( true );
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Ukrycie okna z zadaniami
+	/// </summary>
+
 	private void hideBox() {
 		clearBox();
 		gameObject.SetActive( false );
@@ -215,6 +268,9 @@ public class AchivmentBox : MonoBehaviour {
 	//	  X     X  XX     X     X       X   X   X   X   X   X     X       X     X   X   X  XX
 	//	XXXXX   X   X     X     XXXXX   X   X   X   X    XXX      X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Funkcja wykonywana po naciśnięciu przycisku zamknięcia okna zadań.
+	/// </summary>
 
 	private void onButtonCloseClick() {
 		hideBox();

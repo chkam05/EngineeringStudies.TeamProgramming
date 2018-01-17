@@ -30,10 +30,9 @@ public class BouncingBalls : MonoBehaviour {
 	// ######################################################################
 	//	INICJOWANIE
 	// ######################################################################
-
-	void Start () {
-		//
-	}
+	/// <summary>
+	/// Funkcja sprawdza kontrole gracza.
+	/// </summary>
 
 	void Update() {
 		if ( Input.GetMouseButtonDown( 0 ) ) {
@@ -49,6 +48,11 @@ public class BouncingBalls : MonoBehaviour {
 		ballChecker();
 	}
 
+	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja resetująca symulację
+	/// </summary>
+
 	public void resetSimulation() {
 		for ( int i = balls.Count-1; i > 0; i-- ) {
 			destroyBall( i );
@@ -63,6 +67,9 @@ public class BouncingBalls : MonoBehaviour {
 	// ######################################################################
 	//	CHECK
 	// ######################################################################
+	/// <summary>
+	/// Funckja ograniczająca poruszanie się piłek.
+	/// </summary>
 
 	private void ballChecker() {
 		for ( int b = 0; b < balls.Count; b++ ) {
@@ -87,6 +94,9 @@ public class BouncingBalls : MonoBehaviour {
 	// ######################################################################
 	//	BALLS
 	// ######################################################################
+	/// <summary>
+	/// Funkcja dodająca objekt piłki.
+	/// </summary>
 
 	public void addBall() {
 		if ( balls.Count >= 10 ) { return; }
@@ -110,6 +120,11 @@ public class BouncingBalls : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja usuwająca piłkę.
+	/// </summary>
+	/// <param name="index"> Numer piłki. </param>
+
 	public void destroyBall( int index ) {
 		if ( balls.Count <= 1 || index >= balls.Count ) { return; }
 
@@ -121,6 +136,13 @@ public class BouncingBalls : MonoBehaviour {
 	// ######################################################################
 	//	DATA
 	// ######################################################################
+	/// <summary>
+	/// Funkcja konfigurująca piłkę.
+	/// </summary>
+	/// <param name="index"> Numer piłki. </param>
+	/// <param name="mass"> Masa piłki. </param>
+	/// <param name="friction"> Chropowatość powierzchni. </param>
+	/// <param name="bounciess"> Skoczność piłki. </param>
 
 	public void setData( int index, float mass, float friction, float bounciess ) {
 		if ( index >= 0 && index < balls.Count ) {
@@ -135,6 +157,11 @@ public class BouncingBalls : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja ustawia grawitację dla pola.
+	/// </summary>
+	/// <param name="gravity"> True - grawitacja, False - brak grawitacji. </param>
+
 	public void setGravity( bool gravity ) {
 		this.gravity	=	gravity;
 
@@ -144,11 +171,22 @@ public class BouncingBalls : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja ustawiająca moc przyspieszenia.
+	/// </summary>
+	/// <param name="speed"> Przyspieszenie. </param>
+
 	public void setSpeed( float speed ) {
 		this.speed		=	speed;
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pobranie inforamcji o piłce.
+	/// </summary>
+	/// <returns> Dane piłki w formacie tablicy. </returns>
+	/// <param name="index"> Numer piłki. </param>
+
 	public object[] getData( int index ) {
 		if ( index >= 0 && index < balls.Count ) {
 			var		material	=	balls[index].GetComponent<SphereCollider>().material;
@@ -164,11 +202,21 @@ public class BouncingBalls : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pobiera inforamcje o grawitacji.
+	/// </summary>
+	/// <returns> True - jest, False - brak. </returns>
+
 	public bool getGravity() {
 		return this.gravity;
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Pobiera informacje o aktualnym przyspieszeniu.
+	/// </summary>
+	/// <returns> Przyspieszenie. </returns>
+
 	public float getSpeed() {
 		return this.speed;
 	}
@@ -176,6 +224,9 @@ public class BouncingBalls : MonoBehaviour {
 	// ######################################################################
 	//	CONTROLLER
 	// ######################################################################
+	/// <summary>
+	/// Sprawdza kontakt kursora z piłką.
+	/// </summary>
 
 	private void raycastHit() {
 		RaycastHit	hitInfo		=	new RaycastHit();
@@ -192,12 +243,20 @@ public class BouncingBalls : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Wybór piłki kursorem.
+	/// </summary>
+
 	private void onMouseDown() {
 		ball_current.GetComponent<Rigidbody>().isKinematic	=	true;
 		//ball_current.GetComponent<Collider>().enabled		=	false;
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Nadanie piłce pędu przez poruszanie kursora.
+	/// </summary>
+
 	private void onMouseDrag() {
 		if ( ball_current != null ) {
 			Ray			ray		=	Camera.main.ScreenPointToRay( Input.mousePosition );
@@ -206,6 +265,10 @@ public class BouncingBalls : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Puszczenie kursora i zwolnienie piłki.
+	/// </summary>
+
 	private void onMouseUp() {
 		if ( ball_current != null ) {
 			ball_current.GetComponent<Rigidbody>().isKinematic	=	false;

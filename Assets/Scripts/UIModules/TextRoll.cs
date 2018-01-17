@@ -31,12 +31,20 @@ public class TextRoll : MonoBehaviour {
 	// ...
 
 	// ######################################################################
+	/// <summary>
+	/// Uruchamia konfigurację wszystkich komponentów
+	/// </summary>
+
 	void Start () {
 		initText		=	gameObject.GetComponent<Text>().text;
 		resetText();
 	}
 	
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja timera;
+	/// </summary>
+
 	void Update () {
 		timer			+=	timerSpeed;
 
@@ -53,17 +61,30 @@ public class TextRoll : MonoBehaviour {
 	}
 	
 	// ######################################################################
+	/// <summary>
+	/// Funkcja ustawia tekst przewijający się.
+	/// </summary>
+	/// <param name="text"> Tekst. </param>
+
 	public void setText( string text ) {
 		initText		=	text;
 		resetText();
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja pokazująca tekst.
+	/// </summary>
+
 	private void showText() {
 		gameObject.GetComponent<Text>().text	=	activeText;
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja resetująca tekst.
+	/// </summary>
+
 	private void resetText() {
 		activeText		=	initText;
 		timer			=	0.0f;

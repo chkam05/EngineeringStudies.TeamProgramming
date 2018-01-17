@@ -34,7 +34,14 @@ public class MessageQBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
-	
+	/// <summary>
+	/// Funkcja inicjująca okno zapytania.
+	/// </summary>
+	/// <param name="texts"> Teksty, (Tytuł, zapytanie, tekst przycisku Tak, tekst przycisku Nie). </param>
+	/// <param name="functionYES"> Funkcja przycisku Tak </param>
+	/// <param name="functionNO"> Funkcja przycisku Nie </param>
+	/// <param name="args"> Argumenty funckji. </param>
+
 	public void Init( string[] texts, MessageQBoxYesAction functionYES, MessageQBoxNoAction functionNO, object[] args ) {
 		clearBox();
 		if ( texts.Length > 0 && texts[0] != null ) { text_title.GetComponent<Text>().text								=	texts[0]; }
@@ -54,6 +61,9 @@ public class MessageQBox : MonoBehaviour {
 	//	X   X   X   X   X  XX   X   X   X   X   X       X   X
 	//	X   X   X   X   X   X   X   X    XXXX   XXXXX   X   X
 	// ######################################################################
+	/// <summary>
+	/// Funkcja czyszcząca okno.
+	/// </summary>
 
 	private void clearBox() {
 		ActionYES														=	null;
@@ -67,6 +77,10 @@ public class MessageQBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja wyświetlająca okno
+	/// </summary>
+
 	private void showBox() {
 		button_yes.GetComponent<Button>().onClick.AddListener( onButtonYesClick );
 		button_no.GetComponent<Button>().onClick.AddListener( onButtonNoClick );
@@ -74,6 +88,10 @@ public class MessageQBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja ukrywająca okno
+	/// </summary>
+
 	private void hideBox() {
 		gameObject.SetActive( false );
 	}
@@ -85,6 +103,9 @@ public class MessageQBox : MonoBehaviour {
 	//	  X     X  XX     X     X       X   X   X   X   X   X     X       X     X   X   X  XX
 	//	XXXXX   X   X     X     XXXXX   X   X   X   X    XXX      X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Funkcja przycisku Tak
+	/// </summary>
 
 	private void onButtonYesClick() {
 		hideBox();
@@ -92,6 +113,10 @@ public class MessageQBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja przycisku Nie
+	/// </summary>
+
 	private void onButtonNoClick() {
 		hideBox();
 		if ( ActionNO != null ) { ActionNO( action_objects ); }

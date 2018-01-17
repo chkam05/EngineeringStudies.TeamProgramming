@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Nauka/Bloki Ruchome Nauka.unity
+- path: Assets/Scenes/Nauka/Dzwignia dwustronna2 nauka.unity
   isLoaded: 1
   isActive: 1

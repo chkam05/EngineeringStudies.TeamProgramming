@@ -36,7 +36,12 @@ public class WelcomeBox : MonoBehaviour {
 	//	  X     X  XX     X       X  
 	//	XXXXX   X   X   XXXXX     X  
 	// ######################################################################
-	
+	/// <summary>
+	/// Funkcja inicjująca animacją wprowadzającą.
+	/// </summary>
+	/// <param name="title"> Tytuł. </param>
+	/// <param name="subtitle"> Podtytuł. </param>
+
 	public void Init( string title, string subtitle ) {
 		text_title.GetComponent<Text>().text		=	title;
 		text_subtitle.GetComponent<Text>().text		=	subtitle;
@@ -48,6 +53,11 @@ public class WelcomeBox : MonoBehaviour {
 		setBackgroundColor( background_alpha );
 		gameObject.SetActive( true );
 	}
+
+	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja zawiadująca animacjiami.
+	/// </summary>
 
 	void Update() {
 		if ( text_showanimation ) { textShowAnimation(); }
@@ -63,6 +73,9 @@ public class WelcomeBox : MonoBehaviour {
 	//	X   X   X  XX     X     X   X   X   X     X       X     X   X   X  XX
 	//	X   X   X   X   XXXXX   X   X   X   X     X     XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Animacja pojawiania się tekstu.
+	/// </summary>
 
 	public void textShowAnimation() {
 		text_alpha	+=	color_jump;
@@ -75,6 +88,10 @@ public class WelcomeBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Funkcja oczekująca na przeczytanie tekstu wprowadzenia.
+	/// </summary>
+
 	public void awaitAnimation() {
 		await_timer	+=	-color_jump;
 
@@ -85,6 +102,10 @@ public class WelcomeBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Animacja ukrycia tekstu.
+	/// </summary>
+
 	public void textHideAnimation() {
 		text_alpha	+=	-color_jump;
 
@@ -96,6 +117,10 @@ public class WelcomeBox : MonoBehaviour {
 	}
 
 	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Animacja zanikania tła.
+	/// </summary>
+
 	public void backgroundAnimation() {
 		background_alpha	+=	-color_jump;
 
@@ -114,11 +139,21 @@ public class WelcomeBox : MonoBehaviour {
 	//	X   X   X   X   X       X   X   X   X
 	//	 XXX     XXX    XXXXX    XXX    X   X
 	// ######################################################################
+	/// <summary>
+	/// Ustawienie widoczności tekstu.
+	/// </summary>
+	/// <param name="alpha"> 0 - nie widoczny, 1 - widoczny </param>
 
 	private void setTextColor( float alpha ) {
 		text_title.GetComponent<Text>().color		=	new Color( 1.0f, 1.0f, 1.0f, alpha );
 		text_subtitle.GetComponent<Text>().color	=	new Color( 1.0f, 1.0f, 1.0f, alpha );
 	}
+
+	// ----------------------------------------------------------------------
+	/// <summary>
+	/// Ustawienie widoczności tła.
+	/// </summary>
+	/// <param name="alpha"> 0 - nie widoczne, 1 - widoczne </param>
 
 	private void setBackgroundColor( float alpha ) {
 		panel_background.GetComponent<Image>().color	=	new Color( 0.0f, 0.0f, 0.0f, alpha );
